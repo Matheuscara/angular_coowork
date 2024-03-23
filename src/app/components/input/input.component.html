@@ -1,0 +1,30 @@
+<div [formGroup]="form" class="form-group relative flex flex-col">
+  <div class="flex pb-1">
+    <label class="text-primary pb-0 text-base pt-2 font-inter" [(for)]="id">{{
+      label
+    }}</label>
+
+    <div class="text-sm text-secondary pt-2 pl-1">
+      {{ opcional ? "" : "Required" }}
+    </div>
+  </div>
+
+  <input
+    type="{{ type }}"
+    [id]="id"
+    [formControlName]="campo || ''"
+    [placeholder]="placeholder"
+    class="form-control font-inter justify-self-auto p-2 rounded-4x0 focus:outline-none border-border-1 border"
+    [ngClass]="{
+      'border-2 border-invalid': form.controls[campo].errors && form.controls[campo].touched
+    }"
+    pInputText
+  />
+
+  <!-- <div *ngIf="campo.invalid && campo.touched" class="invalid-feedback"> -->
+  <!-- <div *ngIf="campo.errors && campo.errors.required">{{ errorMessage.required }}</div>
+        <div *ngIf="campo.errors && campo.errors.minlength">{{ errorMessage.minlength }}</div>
+        <div *ngIf="campo.errors && campo.errors.maxlength">{{ errorMessage.maxlength }}</div> -->
+  <!-- Adicione outras mensagens de erro conforme necessário -->
+  <!-- </div> -->
+</div>

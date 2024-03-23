@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { UserStore } from './signals/user/user.state';
+import { LayoutComponent } from './components/layout/layout.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, LayoutComponent],
+  providers: [UserStore],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'angular-coowork';
-}
+export class AppComponent {}

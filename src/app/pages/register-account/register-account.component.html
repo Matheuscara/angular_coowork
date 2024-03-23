@@ -1,0 +1,166 @@
+<div class="lg:flex bg-tertiary">
+  <section
+    id="container-login"
+    class="h-full min-h-screen flex justify-center flex-col pr-5 pl-5 bg-white lg:inline-flex lg:border-r lg:border-border-1 lg:shadow-lg lg:ml-auto lg:h-auto lg:flex-auto lg:max-w-max lg:min-w-144"
+  >
+    <img
+      class="absolute top-10"
+      src="../../assets/logos/logo-full.svg"
+      alt="logo-full"
+    />
+
+    <h1
+      class="form-login font-urbaninst font-bold text-primary mt-4 mb-1 text-3xl"
+    >
+      Create an account
+    </h1>
+    <span class="text-secondary text-base mb-4"
+      >Enter your data below to create your account</span
+    >
+
+    <div class="flex flex-row justify-around space-x-1">
+      <app-button
+        class="w-full border-2 rounded-4x0 bg-white border-border-1 transition hover:bg-whiteSmull"
+        id="login"
+      >
+        <img
+          width="25px"
+          src="../../../assets/icons/facebook.svg"
+          alt="facebook"
+          srcset=""
+        />
+      </app-button>
+      <app-button
+        class="w-full border-2 rounded-4x0 bg-white border-border-1 transition hover:bg-whiteSmull"
+        id="login"
+      >
+        <img
+          width="25px"
+          src="../../../assets/icons/google.svg"
+          alt="google-button"
+          srcset=""
+        />
+      </app-button>
+      <app-button
+        class="w-full border-2 rounded-4x0 bg-white border-border-1 transition hover:bg-whiteSmull"
+        id="login"
+      >
+        <img
+          width="25px"
+          src="../../../assets/icons/apple.svg"
+          alt="apple-button"
+          srcset=""
+        />
+      </app-button>
+    </div>
+    <app-separate class="mt-5 mb-5">Or create with</app-separate>
+
+    <form [formGroup]="form">
+      <div class="w-full">
+        <app-input
+          label="Full name"
+          id="fullName"
+          [opcional]="false"
+          campo="fullName"
+          placeholder="Enter yout full name"
+          [form]="form"
+        />
+        <app-input
+          label="Email"
+          id="Email"
+          [opcional]="false"
+          campo="email"
+          [form]="form"
+          placeholder="email@company.com"
+        />
+        <app-input
+          type="password"
+          label="Password"
+          id="password"
+          [opcional]="false"
+          campo="password"
+          [form]="form"
+          placeholder="Enter yout password"
+        />
+        <app-input
+          label="Company"
+          id="company"
+          [opcional]="true"
+          campo="company"
+          [form]="form"
+          placeholder="Enter yout company"
+        />
+      </div>
+
+      <app-button (click)="submit()" class="mt-4" id="createAccount"
+        >Create account</app-button
+      >
+    </form>
+
+    <h3 class="pt-2 flex justify-end">
+      Have account?<span class="opacity-50 pl-2 hover:opacity-100 transition"
+        >Enter here</span
+      >
+    </h3>
+
+    <h3 class="pt-10 text-sm flex opacity-50 justify-center">
+      Logo Inc. Copyright 2024, All Rights Reserved.
+    </h3>
+  </section>
+  <div class="hidden lg:flex p-5 lg:flex-auto w-80">
+    <div class="fixed top-1 right-1 flex items-center">
+      <h1
+        class="hidden xl:flex font-urbaninst text-primary text-xl font-semibold"
+      >
+        <span class="opacity-50 text-2xl">Register </span> to be a part of the
+        group
+      </h1>
+
+      <img
+        class="hidden xl:flex mx-1 pl-2"
+        src="../../../assets/icons/seta-direita.svg"
+        alt="seta-direita"
+      />
+
+      <app-button class="p-5" id="login">Register Now</app-button>
+    </div>
+
+    <div class="fixed bottom-16 flex items-center">
+      <h1 class="font-urbaninst text-primary text-3xl font-semibold">
+        <span class="opacity-50">Think about saying:</span>
+        <br />
+        If you're going to go, look your best
+      </h1>
+    </div>
+
+    <img
+      class="hidden lg:flex lg: bottom-52 absolute bottom-40 opacity-90"
+      src="../../../assets/draws/bottons.svg"
+      alt="draws"
+    />
+
+    <img
+      class="absolute top-20 opacity-40"
+      src="../../../assets/draws/bottons.svg"
+      alt="bottons-draw"
+    />
+
+    <img
+      class="hidden xl:flex absolute bottom-32 right-10 opacity-90"
+      src="../../../assets/draws/bottons.svg"
+      alt="bottons-draw"
+    />
+
+    <img
+      class="hidden xl:flex absolute bottom-80 right-96"
+      src="../../../assets/draws/circle.svg"
+      alt="bottons-draw"
+    />
+
+    <img
+      class="hidden xl:flex w-144 fixed bottom-0 right-0"
+      src="../../../assets/freePik/loginArt.svg"
+      alt="login-art"
+    />
+  </div>
+</div>
