@@ -1,28 +1,33 @@
-# AngularCoowork
+## Projeto Angular Coowork
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+Este projeto Angular, atualizado para a última versão do Angular CLI, demonstra a implementação avançada de várias tecnologias, incluindo Server-Side Rendering (SSR) para melhoria do SEO e desempenho, Tailwind CSS para estilização utilitária, e PrimeNG para componentes ricos de UI. Além disso, utilizamos os Signals do RxJS para um gerenciamento de estado reativo e eficiente.
 
-## Development server
+# Características
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- SSR (Server-Side Rendering): Melhoria no SEO e no carregamento inicial da página.
+- Tailwind CSS: Framework CSS para design rápido e responsivo.
+- PrimeNG: Biblioteca de componentes de interface de usuário para Angular.
+- Signals do RxJS: Nova abordagem para gerenciamento de estado com RxJS, proporcionando maior eficiência.
+- Servidor de Desenvolvimento
+- Execute ng serve para um servidor de desenvolvimento. Navegue para http://localhost:4200/. A aplicação será recarregada automaticamente se você alterar qualquer arquivo fonte.
 
-## Code scaffolding
+# NgRx State vs NgRx SignalsState
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Os Signals, uma funcionalidade relativamente nova no RxJS, oferecem uma abordagem diferente para o gerenciamento de estado em aplicações Angular em comparação com os métodos tradicionais. Enquanto o gerenciamento de estado convencional em Angular geralmente envolve o uso de serviços com Observables ou o uso de bibliotecas de estado como NgRx ou Akita, os Signals introduzem uma forma mais simplificada e menos verbosa de gerenciar estados reativos.
 
-## Build
+Com os Signals, você pode ter um estado reativo de maneira mais direta e menos complexa, sem a necessidade de explicitamente gerenciar streams de observables, subscriptions ou a complexidade de ações e reducers encontrados em soluções mais robustas de gerenciamento de estado. Isso pode tornar o Signals uma opção atraente para cenários onde o gerenciamento de estado precisa ser reativo, mas não necessariamente precisa da robustez completa de uma solução de gerenciamento de estado global como NgRx.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Porque Signals?
 
-## Running unit tests
+O tipo signal é a nova primitiva reativa do Angular. Seu propósito é manter um valor, assim como uma variável padrão, mas a característica distintiva de um signal é seu comportamento único. Se um signal mudar, ele notificará tudo que dependa dele.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Além disso, o Angular pode usar signals como uma nova abordagem para detectar e acionar mudanças, em vez da abordagem padrão atual de verificar alterações em toda a árvore de componentes.
 
-## Running end-to-end tests
+![Signals vs Zone.js](https://static1.makeuseofimages.com/wordpress/wp-content/uploads/2023/03/old-approach-vs-new-signals-approach.jpg?q=50&fit=crop&w=1500&dpr=1.5)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+# Testes
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# angular_coowork
+Execute ng test para testes unitários e ng e2e para testes end-to-end, utilizando as mais recentes práticas de teste integradas com Angular.
+
+
