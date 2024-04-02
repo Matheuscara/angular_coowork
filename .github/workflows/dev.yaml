@@ -5,19 +5,19 @@ on: [pull_request, push]
 
 # Define as etapas que compõem o fluxo de trabalho
 jobs:
-  # nome do trabalho
+  # Nome do trabalho
   ci-angular-workflow:
-    runs-on: ubunto-latest
+    runs-on: ubuntu-latest
     # Define as etapas que compõem o trabalho
     steps:
-      # Chona o repositorio com a action ja disponivel do github checkout
-      - uses: actions/checkout@v2
-      # instala o node
+      # Clona o repositório com a action já disponível do GitHub Checkout
+      - uses: actions/checkout@v3
+      # Instala o Node.js
       - name: Using Node.js
         uses: actions/setup-node@v2
         # Passando argumentos para a action
         with:
-          node-version: 20.
+          node-version: '16.x' # Altere para a versão do Node.js que seu projeto utiliza
       # Rodando a action manualmente
       - name: run install, build and test
         # Rodando os comandos npm install, npm run build e npm run test
