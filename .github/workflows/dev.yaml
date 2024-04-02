@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v2
         # Passando argumentos para a action
         with:
-          node-version: '16.x' # Altere para a versão do Node.js que seu projeto utiliza
+          node-version: '20.x' # Altere para a versão do Node.js que seu projeto utiliza
       # Rodando a action manualmente
       - name: run install, build and test
         # Rodando os comandos npm install, npm run build e npm run test
