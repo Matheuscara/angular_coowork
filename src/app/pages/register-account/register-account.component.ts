@@ -1,6 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  OnInit,
+  ViewEncapsulation,
   effect,
   inject,
 } from '@angular/core';
@@ -17,7 +19,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { exampleBody } from '../../services/user/dtos/createUser.dto.request';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputMaskComponent } from '../../components/input-mask/input-mask.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { validateCpf, validateTelefone } from '../../utils/validators';
+import { showAlert } from '../../utils/utils';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-register-account',
@@ -29,19 +38,38 @@ import { exampleBody } from '../../services/user/dtos/createUser.dto.request';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CalendarModule,
+    InputTextModule,
+    InputMaskComponent,
+    ToastModule,
+    ProgressBarModule,
   ],
+  providers: [MessageService],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './register-account.component.html',
   styleUrl: './register-account.component.scss',
 })
-export class RegisterAccountComponent {
+export class RegisterAccountComponent implements OnInit {
   readonly store = inject(UserStore);
 
   form: FormGroup = new FormGroup({});
+  alert: boolean = false;
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private messageService: MessageService
+  ) {
     this.form = this.fb.group({
-      fullName: [
+      primeiro_nome: [
+        '',
+        {
+          validators: [Validators.required],
+          updateOn: 'blur',
+        },
+      ],
+
+      ultimo_nome: [
         '',
         {
           validators: [Validators.required],
@@ -57,6 +85,38 @@ export class RegisterAccountComponent {
         },
       ],
 
+      data_nascimento: [
+        '',
+        {
+          validators: [Validators.required],
+          updateOn: 'blur',
+        },
+      ],
+
+      empresa: [
+        '',
+        {
+          validators: [],
+          updateOn: 'blur',
+        },
+      ],
+
+      cpf: [
+        '',
+        {
+          validators: [Validators.required],
+          updateOn: 'blur',
+        },
+      ],
+
+      telefone: [
+        '',
+        {
+          validators: [Validators.required],
+          updateOn: 'blur',
+        },
+      ],
+
       password: [
         '',
         {
@@ -65,23 +125,71 @@ export class RegisterAccountComponent {
         },
       ],
 
-      company: [
+      password_confirmation: [
         '',
         {
-          validators: [Validators.required],
+          validators: [Validators.required, Validators.minLength(8)],
           updateOn: 'blur',
         },
       ],
     });
 
     effect(() => {
-      if (this.store.created()) {
+      if (this.store.createUser().success) {
         this.router.navigate(['/login']);
+      }
+
+      if (this.store.createUser().error) {
+        showAlert(
+          'error',
+          'Error',
+          this.store.createUser().error,
+          this.messageService
+        );
       }
     });
   }
 
+  ngOnInit(): void {
+    this.store.resetCreated();
+  }
+
   submit() {
-    this.store.postCreateUser(exampleBody);
+    try {
+      const form = this.form.getRawValue();
+      form.telefone = form.telefone.replace(/\D/g, '');
+      form.cpf = form.cpf.replace(/\D/g, '');
+      form.data_nascimento = form.data_nascimento.toISOString().split('T')[0];
+
+      if (!validateCpf(form.cpf)) {
+        this.form.get('cpf')?.setErrors({ invalid: true });
+        throw new Error('Cpf invalid.');
+      }
+
+      if (!validateTelefone(form.telefone)) {
+        this.form.get('telefone')?.setErrors({ invalid: true });
+        throw new Error('Phone invalid.');
+      }
+
+      if (form.password !== form.password_confirmation) {
+        this.form.get('password')?.setErrors({ invalid: true });
+        this.form.get('password_confirmation')?.setErrors({ invalid: true });
+        throw new Error('Passwords must be the same.');
+      }
+
+      Object.keys(form).forEach((key) => {
+        if (form[key] === null || form[key] === '') {
+          delete form[key];
+        }
+      });
+
+      this.store.postCreateUser(form);
+    } catch (error: any) {
+      showAlert('error', 'Error', error.message, this.messageService);
+    }
+  }
+
+  redirectLogin() {
+    this.router.navigate(['/login']);
   }
 }

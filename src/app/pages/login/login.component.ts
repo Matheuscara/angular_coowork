@@ -21,6 +21,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { showAlert } from '../../utils/utils';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +38,9 @@ import { ProgressBarModule } from 'primeng/progressbar';
     NgIf,
     NgFor,
     ProgressBarModule,
+    ToastModule,
   ],
+  providers: [MessageService],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -45,7 +50,11 @@ export class LoginComponent {
 
   form: FormGroup = new FormGroup({});
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private messageService: MessageService
+  ) {
     this.form = this.fb.group({
       email: [
         '',
@@ -65,8 +74,18 @@ export class LoginComponent {
     });
 
     effect(() => {
-      if (this.store.userConected()) {
+      if (this.store.login().success) {
         this.router.navigate(['/home']);
+      }
+
+      if (this.store.login().error) {
+        this.form.reset();
+        showAlert(
+          'error',
+          'Error',
+          this.store.login().error,
+          this.messageService
+        );
       }
     });
   }
@@ -78,8 +97,7 @@ export class LoginComponent {
     });
   }
 
-  navegarParaOutraPagina() {
-    console.log('navegarParaOutraPagina');
+  redirectRegisterAcount() {
     this.router.navigate(['/register-account']);
   }
 }

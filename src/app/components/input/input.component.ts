@@ -7,11 +7,18 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, ButtonModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    InputTextModule,
+  ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
 })

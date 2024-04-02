@@ -7,17 +7,36 @@ import { Endereco } from './states/endereco.state';
 
 export interface UserState {
   connected: boolean;
-  loading: boolean;
-  created: boolean;
+  login: {
+    loading: boolean;
+    error: string;
+    success: boolean;
+  };
+  createUser: {
+    loading: boolean;
+    error: string;
+    success: boolean;
+  };
   user: User;
   endereco: Endereco;
 }
 
 export const initialState: UserState = {
   connected: false,
-  loading: false,
-  created: false,
+  login: {
+    loading: false,
+    error: '',
+    success: false,
+  },
+  createUser: {
+    loading: false,
+    error: '',
+    success: false,
+  },
   user: {
+    loading: false,
+    error: '',
+    success: false,
     id: null,
     primeiro_nome: '',
     ultimo_nome: '',
@@ -28,8 +47,6 @@ export const initialState: UserState = {
     cpf: '',
     imagem: '',
     telefone: '',
-    password: '',
-    password_confirmation: '',
   },
   endereco: {
     rua: '',
@@ -48,5 +65,4 @@ export const UserStore = signalStore(
   UserSelectors(),
   UserMethods(),
   UserHooks()
-  
 );

@@ -1,7 +1,7 @@
 <div class="lg:flex bg-tertiary">
   <section
     id="container-login"
-    class="h-full min-h-screen flex justify-center flex-col pr-5 pl-5 bg-white lg:inline-flex lg:border-r lg:border-border-1 lg:shadow-lg lg:ml-auto lg:h-auto lg:flex-auto lg:max-w-max lg:min-w-144"
+    class="h-full min-h-screen flex justify-center flex-col pr-5 pl-5 bg-white lg:inline-flex pb-24 lg:border-r lg:border-border-1 lg:shadow-lg lg:ml-auto lg:h-auto lg:flex-auto lg:max-w-max lg:min-w-144"
   >
     <img
       class="absolute top-10"
@@ -58,13 +58,23 @@
     <form [formGroup]="form">
       <div class="w-full">
         <app-input
-          label="Full name"
-          id="fullName"
+          label="First name"
+          id="firstName"
           [opcional]="false"
-          campo="fullName"
+          campo="primeiro_nome"
           placeholder="Enter yout full name"
           [form]="form"
         />
+
+        <app-input
+          label="Last name"
+          id="LastName"
+          [opcional]="false"
+          campo="ultimo_nome"
+          placeholder="Enter yout full name"
+          [form]="form"
+        />
+
         <app-input
           label="Email"
           id="Email"
@@ -73,6 +83,54 @@
           [form]="form"
           placeholder="email@company.com"
         />
+
+        <div class="birth_date-input">
+          <div class="flex pb-1">
+            <label class="text-primary pb-0 text-base pt-2 font-inter"
+              >Date Of Birth</label
+            >
+
+            <div class="text-sm text-secondary pt-2 pl-1">Required</div>
+          </div>
+          <p-calendar
+            class="full-width-calendar"
+            formControlName="data_nascimento"
+            dateFormat="dd/mm/yy"
+            placeholder="dd/mm/yyyy"
+          ></p-calendar>
+        </div>
+
+        <app-input
+          label="Company"
+          id="company"
+          [opcional]="true"
+          campo="empresa"
+          [form]="form"
+          placeholder="Enter yout company"
+        />
+
+        <app-input-mask
+          label="CPF"
+          id="cpf_input"
+          campo="cpf"
+          placeholder="000.000.000-00"
+          [opcional]="false"
+          mask="999.999.999-99"
+          [form]="form"
+        >
+        </app-input-mask>
+
+        <app-input-mask
+          label="Phone"
+          id="telefone_input"
+          campo="telefone"
+          placeholder="(00) 00000-0000"
+          [opcional]="false"
+          mask="(99) 99999-9999"
+          [form]="form"
+        >
+        </app-input-mask>
+
         <app-input
           type="password"
           label="Password"
@@ -80,25 +138,49 @@
           [opcional]="false"
           campo="password"
           [form]="form"
-          placeholder="Enter yout password"
+          placeholder="Enter your password"
         />
+
         <app-input
-          label="Company"
-          id="company"
-          [opcional]="true"
-          campo="company"
+          type="password"
+          label="Password confirmation"
+          id="passwordConfirmantion"
+          [opcional]="false"
+          campo="password_confirmation"
           [form]="form"
-          placeholder="Enter yout company"
+          placeholder="Enter your password confirmation"
         />
       </div>
 
-      <app-button (click)="submit()" class="mt-4" id="createAccount"
+      @if (this.store.createUser().loading) {
+      <app-button
+        [disabled]="this.form.invalid || this.store.createUser().loading"
+        (click)="submit()"
+        class="mt-4 rounded-none rounded-t-lg"
+        id="login"
         >Create account</app-button
       >
+      <p-progressBar
+        mode="indeterminate"
+        [style]="{ height: '5px', 'border-radius': '0 0 10px 10px' }"
+        styleClass="rounded-4x0 rounded-b-lg"
+        color="#fad3e7"
+      ></p-progressBar>
+      } @else {
+      <app-button
+        [disabled]="this.form.invalid || this.store.createUser().loading"
+        (click)="submit()"
+        class="mt-4"
+        id="login"
+        >Create account</app-button
+      >
+      }
     </form>
 
     <h3 class="pt-2 flex justify-end">
-      Have account?<span class="opacity-50 pl-2 hover:opacity-100 transition"
+      Have account?<span
+        class="opacity-50 pl-2 hover:opacity-100 transition"
+        (click)="redirectLogin()"
         >Enter here</span
       >
     </h3>
@@ -108,23 +190,6 @@
     </h3>
   </section>
   <div class="hidden lg:flex p-5 lg:flex-auto w-80">
-    <div class="fixed top-1 right-1 flex items-center">
-      <h1
-        class="hidden xl:flex font-urbaninst text-primary text-xl font-semibold"
-      >
-        <span class="opacity-50 text-2xl">Register </span> to be a part of the
-        group
-      </h1>
-
-      <img
-        class="hidden xl:flex mx-1 pl-2"
-        src="../../../assets/icons/seta-direita.svg"
-        alt="seta-direita"
-      />
-
-      <app-button class="p-5" id="login">Register Now</app-button>
-    </div>
-
     <div class="fixed bottom-16 flex items-center">
       <h1 class="font-urbaninst text-primary text-3xl font-semibold">
         <span class="opacity-50">Think about saying:</span>
@@ -164,3 +229,4 @@
     />
   </div>
 </div>
+<p-toast></p-toast>

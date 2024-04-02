@@ -1,4 +1,7 @@
 export interface User {
+  loading: boolean;
+  error: string;
+  success: boolean;
   id: number | null;
   primeiro_nome: string;
   ultimo_nome: string;
@@ -9,6 +12,4 @@ export interface User {
   cpf: string;
   imagem: string;
   telefone: string;
-  password: string;
-  password_confirmation: string;
 }

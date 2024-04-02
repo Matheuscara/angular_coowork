@@ -2,9 +2,8 @@ import { withHooks } from "@ngrx/signals";
 
 export function UserHooks() {
   return withHooks({
-    onInit({ resetCreated }) {
+    onInit({ validToken }) {
       console.log('on init');
-      resetCreated();
     },
     onDestroy() {
       console.log('on destroy');

@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UserStore } from './signals/user/user.state';
 import { LayoutComponent } from './components/layout/layout.component';
+import { UserService } from './services/user/user.service';
 
 @Component({
   selector: 'app-root',

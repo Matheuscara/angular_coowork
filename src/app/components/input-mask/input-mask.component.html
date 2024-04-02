@@ -1,0 +1,19 @@
+<div [formGroup]="form" class="telefone_input flex flex-col">
+  <div class="flex pb-1">
+    <label class="text-primary pb-0 text-base pt-2 font-inter">{{
+      label
+    }}</label>
+
+    <div class="text-sm text-secondary pt-2 pl-1">
+      {{ opcional ? "" : "Required" }}
+    </div>
+  </div>
+  <p-inputMask
+    [id]="id"
+    [mask]="mask"
+    [formControlName]="campo"
+    [placeholder]="placeholder"
+  ></p-inputMask>
+</div>
+
+

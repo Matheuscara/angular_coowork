@@ -1,0 +1,27 @@
+name: ci-angular-workflow-dev
+
+# Especifica quando o fluxo de trabalho deve ser executado
+on: [pull_request, push]
+
+# Define as etapas que compõem o fluxo de trabalho
+jobs:
+  # nome do trabalho
+  ci-angular-workflow:
+    runs-on: ubunto-latest
+    # Define as etapas que compõem o trabalho
+    steps:
+      # Chona o repositorio com a action ja disponivel do github checkout
+      - uses: actions/checkout@v2
+      # instala o node
+      - name: Using Node.js
+        uses: actions/setup-node@v2
+        # Passando argumentos para a action
+        with:
+          node-version: 20.
+      # Rodando a action manualmente
+      - name: run install, build and test
+        # Rodando os comandos npm install, npm run build e npm run test
+        run: |
+          npm install
+          npm run build
+          npm run test

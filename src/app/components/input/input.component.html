@@ -16,15 +16,9 @@
     [placeholder]="placeholder"
     class="form-control font-inter justify-self-auto p-2 rounded-4x0 focus:outline-none border-border-1 border"
     [ngClass]="{
-      'border-2 border-invalid': form.controls[campo].errors && form.controls[campo].touched
+      'border-1 border-invalid': form.controls[campo].errors && form.controls[campo].touched
     }"
     pInputText
   />
-
-  <!-- <div *ngIf="campo.invalid && campo.touched" class="invalid-feedback"> -->
-  <!-- <div *ngIf="campo.errors && campo.errors.required">{{ errorMessage.required }}</div>
-        <div *ngIf="campo.errors && campo.errors.minlength">{{ errorMessage.minlength }}</div>
-        <div *ngIf="campo.errors && campo.errors.maxlength">{{ errorMessage.maxlength }}</div> -->
-  <!-- Adicione outras mensagens de erro conforme necessário -->
-  <!-- </div> -->
 </div>
+

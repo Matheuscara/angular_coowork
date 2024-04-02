@@ -3,12 +3,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterAccountComponent } from './pages/register-account/register-account.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
     pathMatch: 'full',
+    canActivate: [AuthGuard],
   },
   {
     title: 'Login',
@@ -21,13 +23,13 @@ export const routes: Routes = [
     component: RegisterAccountComponent,
   },
   // {
-    // path: 'home',
-    // component: LayoutComponent,
-    // children: [
-    //   {
-    //     path: 'dashboard',
-    //     component: LogadoTestComponent,
-    //   },
-    // ],
+  // path: 'home',
+  // component: LayoutComponent,
+  // children: [
+  //   {
+  //     path: 'dashboard',
+  //     component: LogadoTestComponent,
+  //   },
+  // ],
   // },
 ];

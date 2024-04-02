@@ -20,9 +20,12 @@
     "@angular/router": "^17.2.0",
     "@ngrx/signals": "^17.1.1",
     "@ngrx/store": "^17.1.1",
+    "cpf-cnpj-validator": "^1.0.3",
+    "password-checker-validator": "^1.1.0",
     "primeng": "^17.12.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "validar-telefone": "^0.1.0",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
@@ -30,6 +33,7 @@
     "@angular/cli": "^17.2.3",
     "@angular/compiler-cli": "^17.2.0",
     "@types/jasmine": "~5.1.0",
+    "@types/node": "^20.11.30",
     "autoprefixer": "^10.4.19",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
