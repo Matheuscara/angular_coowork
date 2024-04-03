@@ -25,5 +25,3 @@ jobs:
           npm install
           npm run build
           npm run test:prod
-      - name: Coverage Summary
-        run: cat coverage/lcov.info | npx coveralls
