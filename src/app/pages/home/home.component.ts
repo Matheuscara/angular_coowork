@@ -22,6 +22,10 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService) {}
 
+
+
+
+  
   ngOnInit(): void {
     this.store.getUser();
   }
