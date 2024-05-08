@@ -12,3 +12,11 @@ import { MessageService } from "primeng/api";
       detail: detail,
     });
   }
+
+  export function setAccessToken(token: string) {
+    localStorage.setItem('token', token)
+  }
+
+  export function getAccessToken() {
+    return localStorage.getItem('token') || ""
+  }

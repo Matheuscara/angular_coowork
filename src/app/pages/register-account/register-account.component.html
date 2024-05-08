@@ -1,4 +1,4 @@
-<div class="lg:flex bg-tertiary">
+<div class="lg:flex bg-backGround">
   <section
     id="container-login"
     class="h-full min-h-screen flex justify-center flex-col pr-5 pl-5 bg-white lg:inline-flex pb-24 lg:border-r lg:border-border-1 lg:shadow-lg lg:ml-auto lg:h-auto lg:flex-auto lg:max-w-max lg:min-w-144"
@@ -61,7 +61,7 @@
           label="First name"
           id="firstName"
           [opcional]="false"
-          campo="primeiro_nome"
+          campo="firstName"
           placeholder="Enter yout full name"
           [form]="form"
         />
@@ -70,7 +70,7 @@
           label="Last name"
           id="LastName"
           [opcional]="false"
-          campo="ultimo_nome"
+          campo="lastName"
           placeholder="Enter yout full name"
           [form]="form"
         />
@@ -94,7 +94,7 @@
           </div>
           <p-calendar
             class="full-width-calendar"
-            formControlName="data_nascimento"
+            formControlName="birthDate"
             dateFormat="dd/mm/yy"
             placeholder="dd/mm/yyyy"
           ></p-calendar>
@@ -122,8 +122,8 @@
 
         <app-input-mask
           label="Phone"
-          id="telefone_input"
-          campo="telefone"
+          id="phoneNumber_input"
+          campo="phoneNumber"
           placeholder="(00) 00000-0000"
           [opcional]="false"
           mask="(99) 99999-9999"
@@ -146,7 +146,7 @@
           label="Password confirmation"
           id="passwordConfirmantion"
           [opcional]="false"
-          campo="password_confirmation"
+          campo="passwordConfirmation"
           [form]="form"
           placeholder="Enter your password confirmation"
         />

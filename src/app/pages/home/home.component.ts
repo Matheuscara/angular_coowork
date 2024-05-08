@@ -5,33 +5,58 @@ import {
   inject,
 } from '@angular/core';
 import { UserStore } from '../../signals/user/user.state';
-import { JsonPipe } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user/user.service';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { InputComponent } from "../../components/input/input.component";
+import { StatusBarComponent } from '../../components/status-bar/status-bar.component';
+import { SkeletonModule } from 'primeng/skeleton';
+import { CooworkStore } from '../../signals/coowork/coowork.state';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [JsonPipe],
-  changeDetection: ChangeDetectionStrategy.Default,
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+    selector: 'app-home',
+    standalone: true,
+    changeDetection: ChangeDetectionStrategy.Default,
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss',
+    imports: [
+      JsonPipe, 
+      InputComponent, 
+      CommonModule,
+      FormsModule,
+      StatusBarComponent,
+      SkeletonModule
+    ]
 })
 export class HomeComponent implements OnInit {
-  readonly store = inject(UserStore);
+  readonly storeUser = inject(UserStore);
+  readonly storeCoowork = inject(CooworkStore);
 
-  constructor(private router: Router, private userService: UserService) {}
-
-
-
-
+  form: FormGroup = new FormGroup({});
+  test = true;
   
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+  ) {
+    this.form = this.fb.group({
+      searchCoowork: [
+        '',
+        {
+          validators: [],
+          updateOn: 'blur',
+        },
+      ],
+    });
+  }
+
   ngOnInit(): void {
-    this.store.getUser();
+    this.storeUser.getUser();
+    this.storeCoowork.getAll()
   }
 
   logout() {
-    this.userService.postLogout().subscribe();
+    this.storeUser.logout();
     location.reload();
   }
 }

@@ -15,21 +15,11 @@ export const routes: Routes = [
   {
     title: 'Login',
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
   },
   {
     title: 'Register Account',
     path: 'register-account',
     component: RegisterAccountComponent,
   },
-  // {
-  // path: 'home',
-  // component: LayoutComponent,
-  // children: [
-  //   {
-  //     path: 'dashboard',
-  //     component: LogadoTestComponent,
-  //   },
-  // ],
-  // },
 ];

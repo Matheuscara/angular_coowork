@@ -7,6 +7,7 @@ export function UserSelectors() {
     { state: type<UserState>() },
     withComputed(({ ...state }) => ({
       userConected: computed(() => state.connected()),
-    }))
+    })),
+    
   );
 }
