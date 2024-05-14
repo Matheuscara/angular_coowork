@@ -1,3 +1,6 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Matheuscara_angular_coowork&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Matheuscara_angular_coowork)
+
+
 ## Projeto Angular Coowork
 
 Este projeto Angular, atualizado para a última versão do Angular CLI, demonstra a implementação avançada de várias tecnologias, incluindo Server-Side Rendering (SSR) para melhoria do SEO e desempenho, Tailwind CSS para estilização utilitária, e PrimeNG para componentes ricos de UI. Além disso, utilizamos os Signals do RxJS para um gerenciamento de estado reativo e eficiente.
