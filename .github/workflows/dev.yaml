@@ -1,15 +1,13 @@
 name: ci-angular-workflow-dev
 
 # Especifica quando o fluxo de trabalho deve ser executado
-on: [pull_request, push]
-# on:
-#   pull_request:
-#     branches:
-#       - develop
-#       - main
-      
-
-
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 # Define as etapas que compõem o fluxo de trabalho
 jobs:
