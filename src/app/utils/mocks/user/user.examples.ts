@@ -67,6 +67,6 @@ export const postCreateUserMock: CreateUserDtoRequest = {
   cpf: '12345678900',
   imagem: 'https://example.com/profile.jpg',
   phoneNumber: '+1 123-456-7890',
-  password: 'password123',
-  passwordConfirmation: 'password123',
+  password: '',
+  passwordConfirmation: '',
 };
