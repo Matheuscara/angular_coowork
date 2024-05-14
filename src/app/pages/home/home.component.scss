@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+.list-categories {
+    overflow-x: auto;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+      }
+      
+      li {
+        flex: 0 0 auto;
+        padding: 10px;
+        margin-right: 10px; 
+      }
+}
+
+.list-categories::-webkit-scrollbar {
+    display: none;
+}

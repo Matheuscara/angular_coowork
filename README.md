@@ -26,6 +26,10 @@ Além disso, o Angular pode usar signals como uma nova abordagem para detectar e
 ![Signals vs Zone.js](https://static1.makeuseofimages.com/wordpress/wp-content/uploads/2023/03/old-approach-vs-new-signals-approach.jpg?q=50&fit=crop&w=1500&dpr=1.5)
 
 
+# Formas de voce utilizar signals em seu projeto angular
+
+https://www.angulararchitects.io/blog/angular-signals-your-architecture-5-options/
+
 # Testes
 
 Execute ng test para testes unitários e ng e2e para testes end-to-end, utilizando as mais recentes práticas de teste integradas com Angular.

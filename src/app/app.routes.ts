@@ -4,6 +4,7 @@ import { RegisterAccountComponent } from './pages/register-account/register-acco
 import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
+import { CooworkDetailsComponent } from './pages/coowork-details/coowork-details.component';
 
 export const routes: Routes = [
   {
@@ -13,23 +14,48 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    title: 'Login',
-    path: 'login',
-    component: LoginComponent,
+    path: 'home/details/:id',
+    component: CooworkDetailsComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
   },
   {
-    title: 'Register Account',
+    path: 'login',
+    component: LoginComponent,
+    data: { title: 'Login' }
+  },
+  {
     path: 'register-account',
     component: RegisterAccountComponent,
+    data: { title: 'Register Account' }
   },
-  // {
-  // path: 'home',
-  // component: LayoutComponent,
-  // children: [
-  //   {
-  //     path: 'dashboard',
-  //     component: LogadoTestComponent,
-  //   },
-  // ],
-  // },
+  {
+    path: '',
+    component: LayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'home/details',
+        component: CooworkDetailsComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: '**',
+        redirectTo: '/home',
+        pathMatch: 'full',
+      },
+    ],
+  }
 ];

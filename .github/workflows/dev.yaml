@@ -7,6 +7,7 @@ on:
       - develop
       - main
 
+
 # Define as etapas que compõem o fluxo de trabalho
 jobs:
   # Nome do trabalho
@@ -28,6 +29,11 @@ jobs:
         run: |
           npm install
           npm run build
-      - name: run tests
+      - name: run tests and coverage
         # Rodando o comando npm run test
         run: npm run test:prod
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

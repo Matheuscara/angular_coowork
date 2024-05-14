@@ -23,7 +23,7 @@ import { InputTextModule } from 'primeng/inputtext';
   styleUrl: './input.component.scss',
 })
 export class InputComponent implements OnInit {
-  @Input() label: string;
+  @Input() label: string = '';
   @Input() id: string;
   @Input() form: FormGroup;
   @Input() campo: string;

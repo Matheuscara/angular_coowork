@@ -8,8 +8,8 @@ export function validateCpf(cpfParam: string) {
   return true;
 }
 
-export function validateTelefone(telefoneParam: string) {
-  if (!validator(telefoneParam)) {
+export function validatePhoneNumber(phoneNumberParam: string) {
+  if (!validator(phoneNumberParam)) {
     return false;
   }
   return true;

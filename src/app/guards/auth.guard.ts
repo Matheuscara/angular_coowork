@@ -8,7 +8,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, switchMap, map } from 'rxjs/operators';
-import { UserService } from '../services/user/user.service';
+import { UserService } from '../services/user.service';
 
 @Injectable({
   providedIn: 'root',

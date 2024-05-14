@@ -2,7 +2,7 @@ import { signalStore, withState } from '@ngrx/signals';
 import { UserSelectors } from './user.selectors';
 import { UserMethods } from './user.methods';
 import { UserHooks } from './user.hooks';
-import { User } from './states/user.state';
+import { UserState as User } from './states/user.state';
 import { Endereco } from './states/endereco.state';
 
 export interface UserState {
@@ -34,19 +34,23 @@ export const initialState: UserState = {
     success: false,
   },
   user: {
-    loading: false,
-    error: '',
-    success: false,
-    id: null,
-    primeiro_nome: '',
-    ultimo_nome: '',
+    id: 0,
+    firstName: '',
+    lastName: '',
     email: '',
-    data_nascimento: null,
-    tipo_usuario: '',
-    empresa: '',
+    birthDate: new Date(),
+    role: '',
+    password: null,
+    passwordConfirmation: null,
     cpf: '',
-    imagem: '',
-    telefone: '',
+    image: '',
+    phoneNumber: '',
+    enabled: false,
+    accountNonExpired: false,
+    accountNonLocked: false,
+    credentialsNonExpired: false,
+    authorities: [],
+    username: '',
   },
   endereco: {
     rua: '',
