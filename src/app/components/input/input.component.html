@@ -1,5 +1,5 @@
 <div [formGroup]="form" class="form-group relative flex flex-col">
-  <div class="flex pb-1">
+  <div *ngIf="label !== ''" class="flex pb-1">
     <label class="text-primary pb-0 text-base pt-2 font-inter" [(for)]="id">{{
       label
     }}</label>
@@ -14,7 +14,7 @@
     [id]="id"
     [formControlName]="campo || ''"
     [placeholder]="placeholder"
-    class="form-control font-inter justify-self-auto p-2 rounded-4x0 focus:outline-none border-border-1 border"
+    class="form-control font-inter font-thin justify-self-auto p-2 rounded-4x0 focus:outline-none border-border-1 border " 
     [ngClass]="{
       'border-1 border-invalid': form.controls[campo].errors && form.controls[campo].touched
     }"

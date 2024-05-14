@@ -24,7 +24,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputMaskComponent } from '../../components/input-mask/input-mask.component';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { validateCpf, validateTelefone } from '../../utils/validators';
+import { validateCpf, validatePhoneNumber } from '../../utils/validators';
 import { showAlert } from '../../utils/utils';
 import { ProgressBarModule } from 'primeng/progressbar';
 
@@ -61,7 +61,7 @@ export class RegisterAccountComponent implements OnInit {
     private messageService: MessageService
   ) {
     this.form = this.fb.group({
-      primeiro_nome: [
+      firstName: [
         '',
         {
           validators: [Validators.required],
@@ -69,7 +69,7 @@ export class RegisterAccountComponent implements OnInit {
         },
       ],
 
-      ultimo_nome: [
+      lastName: [
         '',
         {
           validators: [Validators.required],
@@ -85,7 +85,7 @@ export class RegisterAccountComponent implements OnInit {
         },
       ],
 
-      data_nascimento: [
+      birthDate: [
         '',
         {
           validators: [Validators.required],
@@ -109,7 +109,7 @@ export class RegisterAccountComponent implements OnInit {
         },
       ],
 
-      telefone: [
+      phoneNumber: [
         '',
         {
           validators: [Validators.required],
@@ -125,7 +125,7 @@ export class RegisterAccountComponent implements OnInit {
         },
       ],
 
-      password_confirmation: [
+      passwordConfirmation: [
         '',
         {
           validators: [Validators.required, Validators.minLength(8)],
@@ -156,24 +156,27 @@ export class RegisterAccountComponent implements OnInit {
 
   submit() {
     try {
-      const form = this.form.getRawValue();
-      form.telefone = form.telefone.replace(/\D/g, '');
+      let form = this.form.getRawValue();
+
+      form.image = '';
+
+      form.phoneNumber = form.phoneNumber.replace(/\D/g, '');
       form.cpf = form.cpf.replace(/\D/g, '');
-      form.data_nascimento = form.data_nascimento.toISOString().split('T')[0];
+      form.birthDate = form.birthDate.toISOString().split('T')[0];
 
       if (!validateCpf(form.cpf)) {
         this.form.get('cpf')?.setErrors({ invalid: true });
         throw new Error('Cpf invalid.');
       }
 
-      if (!validateTelefone(form.telefone)) {
-        this.form.get('telefone')?.setErrors({ invalid: true });
+      if (!validatePhoneNumber(form.phoneNumber)) {
+        this.form.get('phoneNumber')?.setErrors({ invalid: true });
         throw new Error('Phone invalid.');
       }
 
-      if (form.password !== form.password_confirmation) {
+      if (form.password !== form.passwordConfirmation) {
         this.form.get('password')?.setErrors({ invalid: true });
-        this.form.get('password_confirmation')?.setErrors({ invalid: true });
+        this.form.get('passwordConfirmation')?.setErrors({ invalid: true });
         throw new Error('Passwords must be the same.');
       }
 
@@ -182,6 +185,8 @@ export class RegisterAccountComponent implements OnInit {
           delete form[key];
         }
       });
+
+
 
       this.store.postCreateUser(form);
     } catch (error: any) {

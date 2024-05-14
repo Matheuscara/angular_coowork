@@ -9,8 +9,11 @@ const colors = {
   primary: "#0F172A",
 
   secondary: "#9B9DA3",
-
+  tertiary: "#6865FE",
   whiteSmull: "#CBD5E1",
+  backGround: "#F9FAFE",
+  green: "#008379",
+  yellow: "#FFB24D",
 };
 
 module.exports = {
@@ -24,7 +27,6 @@ module.exports = {
     },
     backgroundColor: {
       ...colors,
-      tertiary: "#FFEFEF",
     },
     borderColor: {
       ...colors,

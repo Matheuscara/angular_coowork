@@ -1,12 +1,14 @@
 import { patchState, withMethods } from '@ngrx/signals';
-import { UserService } from '../../services/user/user.service';
+import { UserService } from '../../services/user.service';
 import { inject } from '@angular/core';
-import { tap, delay, catchError, throwError } from 'rxjs';
+import { tap, delay, catchError, throwError, finalize } from 'rxjs';
 import { LoginDtoRequest } from '../../services/user/dtos/login.dto.request';
 import { LoginDtoResponse } from '../../services/user/dtos/login.dto.response';
 import { CreateUserDtoRequest } from '../../services/user/dtos/createUser.dto.request';
 import { initialState } from './user.state';
-import { User } from './states/user.state';
+import { UserState } from './states/user.state';
+import { setAccessToken } from '../../utils/utils';
+import { UserDtoRepsonse } from '../../services/user/dtos/getUser.dto.response';
 
 export function UserMethods() {
   return withMethods((store, userService = inject(UserService)) => ({
@@ -18,7 +20,7 @@ export function UserMethods() {
           error: '',
         },
       });
-      return await userService
+      return userService
         .postLogin(body)
         .pipe(
           catchError((err) => {
@@ -31,8 +33,11 @@ export function UserMethods() {
             });
             return throwError(err);
           }),
+          finalize(() => {}),
           tap((user: LoginDtoResponse) => {
-            userService.accessToken = user.token;
+            userService.accessToken = user.accessToken;
+
+            setAccessToken(user.accessToken);
 
             return patchState(store, {
               login: {
@@ -78,8 +83,7 @@ export function UserMethods() {
         )
         .subscribe();
     },
-    async getUser(test?: any) {
-      console.log(test || 'nada');
+    async getUser() {
       patchState(store, {
         user: {
           ...initialState.user,
@@ -89,7 +93,7 @@ export function UserMethods() {
         },
       });
       return await userService
-        .postGetUser('getUser')
+        .getUser()
         .pipe(
           catchError((err) => {
             patchState(store, {
@@ -102,10 +106,10 @@ export function UserMethods() {
             });
             return throwError(err);
           }),
-          tap((user: User) => {
+          tap((user: UserDtoRepsonse) => {
             return patchState(store, {
               user: {
-                ...user,
+                ...user.user,
                 loading: false,
                 success: true,
                 error: '',
@@ -124,14 +128,22 @@ export function UserMethods() {
         },
       }));
     },
-    addValidUser(user: User) {
-      console.log('teaaa')
+    addValidUser(user: UserState) {
       patchState(store, {
         user: {
           ...user,
           loading: false,
           success: true,
           error: '',
+        },
+      });
+    },
+    logout() {
+      userService.accessToken = '';
+      localStorage.removeItem('token');
+      patchState(store, {
+        user: {
+          ...initialState.user,
         },
       });
     }
