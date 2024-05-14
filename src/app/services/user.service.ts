@@ -52,12 +52,12 @@ export class UserService {
     );
   }
 
-  getTokenVerify(): any {
+  getTokenVerify(): Observable<string> {
     const headers = {
       Authorization: getAccessToken(),
     };
 
-    return this.http.get(this.authUrl + '/validate', {
+    return this.http.get<string>(this.authUrl + '/validate', {
         headers: headers,
       });
   }

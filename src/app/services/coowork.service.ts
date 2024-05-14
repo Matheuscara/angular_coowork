@@ -10,7 +10,7 @@ import { getByIdDtoResponse } from './cooworks/dtos/getById.dto.response';
   providedIn: 'root',
 })
 export class CooworkService {
-  private cooworkUrl: string;
+  cooworkUrl: string;
 
   constructor(private http: HttpClient) {
     this.cooworkUrl = environment.apiUrl + '/v1/coowork';

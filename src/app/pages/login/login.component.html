@@ -36,9 +36,9 @@
       </form>
     </div>
 
-    @if (this.store.login().loading) {
+    @if (this.userStore.login().loading) {
     <app-button
-      [disabled]="this.form.invalid || this.store.login().loading"
+      [disabled]="this.form.invalid || this.userStore.login().loading"
       (click)="login()"
       class="mt-4 rounded-none rounded-t-lg"
       id="login"
@@ -52,7 +52,7 @@
     ></p-progressBar>
     } @else {
     <app-button
-      [disabled]="this.form.invalid || this.store.login().loading"
+      [disabled]="this.form.invalid || this.userStore.login().loading"
       (click)="login()"
       class="mt-4"
       id="login"
