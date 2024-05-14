@@ -1,5 +1,10 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Matheuscara_angular_coowork&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Matheuscara_angular_coowork)
-
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Matheuscara_angular_coowork&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Matheuscara_angular_coowork)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Matheuscara_angular_coowork&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Matheuscara_angular_coowork)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Matheuscara_angular_coowork&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Matheuscara_angular_coowork)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Matheuscara_angular_coowork&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Matheuscara_angular_coowork)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Matheuscara_angular_coowork&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Matheuscara_angular_coowork)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Matheuscara_angular_coowork&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Matheuscara_angular_coowork)
 
 ## Projeto Angular Coowork
 
