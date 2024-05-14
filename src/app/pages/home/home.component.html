@@ -86,7 +86,7 @@
       </li>
       } } @else { @for (coowork of this.storeCoowork.cooworkList().cooworks;
       track $index) {
-      <li class="flex w-full flex-col bg-white rounded-4x2 gap-2 p-3 max-w-128" (click)="redirectDeatils(coowork.id)">
+      <li (keypress)="coowork.id" class="flex w-full flex-col bg-white rounded-4x2 gap-2 p-3 max-w-128" (click)="redirectDeatils(coowork.id)">
         <img
           class="w-full h-80 rounded-4xl"
           src="../../../assets/images/coowork-option.webp"

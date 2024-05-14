@@ -38,6 +38,7 @@
 
     @if (this.userStore.login().loading) {
     <app-button
+      onkeypress="login()"
       [disabled]="this.form.invalid || this.userStore.login().loading"
       (click)="login()"
       class="mt-4 rounded-none rounded-t-lg"
@@ -52,6 +53,7 @@
     ></p-progressBar>
     } @else {
     <app-button
+      onkeypress="login()"
       [disabled]="this.form.invalid || this.userStore.login().loading"
       (click)="login()"
       class="mt-4"
@@ -62,7 +64,9 @@
 
     <h3 class="pt-2 flex justify-end">
       Dont have account?<span
-        class="opacity-50 pl-2 hover:opacity-100 transition" (click)="redirectRegisterAcount()"
+        onkeypress="redirectRegisterAcount()"
+        class="opacity-50 pl-2 hover:opacity-100 transition"
+        (click)="redirectRegisterAcount()"
         >Register here</span
       >
     </h3>
@@ -149,4 +153,3 @@
   </div>
 </div>
 <p-toast></p-toast>
-
