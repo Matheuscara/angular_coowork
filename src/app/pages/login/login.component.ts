@@ -43,7 +43,7 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  readonly store = inject(UserStore);
+  readonly userStore = inject(UserStore);
 
   form: FormGroup = new FormGroup({});
 
@@ -71,16 +71,16 @@ export class LoginComponent {
     });
 
     effect(() => {
-      if (this.store.login().success) {
+      if (this.userStore.login().success) {
         this.router.navigate(['/home']);
       }
 
-      if (this.store.login().error) {
+      if (this.userStore.login().error) {
         this.form.reset();
         showAlert(
           'error',
           'Error',
-          this.store.login().error,
+          this.userStore.login().error,
           this.messageService
         );
       }
@@ -88,7 +88,7 @@ export class LoginComponent {
   }
 
   login() {
-    this.store.postLogin({
+    this.userStore.postLogin({
       email: this.form.value.email,
       password: this.form.value.password,
     });

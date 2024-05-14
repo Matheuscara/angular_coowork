@@ -154,6 +154,7 @@
 
       @if (this.store.createUser().loading) {
       <app-button
+        onkeypress="submit()"
         [disabled]="this.form.invalid || this.store.createUser().loading"
         (click)="submit()"
         class="mt-4 rounded-none rounded-t-lg"
@@ -168,6 +169,7 @@
       ></p-progressBar>
       } @else {
       <app-button
+        onkeypress="submit()"
         [disabled]="this.form.invalid || this.store.createUser().loading"
         (click)="submit()"
         class="mt-4"
@@ -179,6 +181,7 @@
 
     <h3 class="pt-2 flex justify-end">
       Have account?<span
+        onkeypress="redirectLogin()"
         class="opacity-50 pl-2 hover:opacity-100 transition"
         (click)="redirectLogin()"
         >Enter here</span

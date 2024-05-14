@@ -23,6 +23,7 @@
     "@ngrx/signals": "^17.1.1",
     "@ngrx/store": "^17.1.1",
     "cpf-cnpj-validator": "^1.0.3",
+    "ng-mocks": "^14.12.2",
     "password-checker-validator": "^1.1.0",
     "primeicons": "^7.0.0",
     "primeng": "^17.12.0",

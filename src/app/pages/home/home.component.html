@@ -86,7 +86,7 @@
       </li>
       } } @else { @for (coowork of this.storeCoowork.cooworkList().cooworks;
       track $index) {
-      <li class="flex w-full flex-col bg-white rounded-4x2 gap-2 p-3 max-w-128" (click)="redirectDeatils(coowork.id)">
+      <li (keypress)="coowork.id" class="flex w-full flex-col bg-white rounded-4x2 gap-2 p-3 max-w-128" (click)="redirectDeatils(coowork.id)">
         <img
           class="w-full h-80 rounded-4xl"
           src="../../../assets/images/coowork-option.webp"
@@ -95,7 +95,7 @@
         <h1 class="text-base font-bold">{{ coowork.name }}</h1>
         <div class="flex justify-between">
           <span class="text-sm text-gray opacity-40">
-            {{ getCategorieByCoowork(coowork.id) }}
+            {{ getCategorieByCoowork(coowork.id, this.storeCoowork.cooworkList().cooworks) }}
           </span>
 
           <span class="flex gap-1 text-sm text-yellow">
@@ -104,7 +104,7 @@
           </span>
         </div>
         <span class="text-sm font-light text-green"> 
-          {{getDayPrices(coowork.id)}} Day </span>
+          {{getDayPrices(coowork.id, this.storeCoowork.cooworkList().cooworks)}} Day </span>
       </li>
       } }
     </ul>

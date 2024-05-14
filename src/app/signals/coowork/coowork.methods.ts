@@ -1,14 +1,14 @@
 import { patchState, withMethods } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { CooworkService } from '../../services/coowork.service';
-import { catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { getAllDtoResponse } from '../../services/cooworks/dtos/getAll.dto.response';
 import { initialState } from './coowork.state';
 import { cooworkDetails } from '../../models/coowork-details';
 
 export function CooworkMethods() {
   return withMethods((store, cooworkService = inject(CooworkService)) => ({
-    async getAll() {
+    getAll(): Observable<getAllDtoResponse[]> {
       patchState(store, {
         cooworkList: {
           loading: true,
@@ -46,8 +46,7 @@ export function CooworkMethods() {
               },
             });
           })
-        )
-        .subscribe();
+        );
     },
     async getById(id: number) {
       patchState(store, {
@@ -88,6 +87,17 @@ export function CooworkMethods() {
         })
       )
       .subscribe();
+    },
+    resetCooworks() {
+      patchState(store, {
+        cooworkList: {
+          loading: false,
+          error: '',
+          success: false,
+          cooworks: [],
+          cooworkDetails: {}
+        },
+      });
     }
   }));
 }
