@@ -2,7 +2,9 @@ import { patchState, withMethods } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { CooworkService } from '../../services/coowork.service';
 import { catchError, tap, throwError } from 'rxjs';
-import { getAllDtoResponse } from '../../services/cooworks/dtos/getAll.dto.request';
+import { getAllDtoResponse } from '../../services/cooworks/dtos/getAll.dto.response';
+import { initialState } from './coowork.state';
+import { cooworkDetails } from '../../models/coowork-details';
 
 export function CooworkMethods() {
   return withMethods((store, cooworkService = inject(CooworkService)) => ({
@@ -15,9 +17,7 @@ export function CooworkMethods() {
           cooworks: [],
         },
       });
-
-      return setTimeout(() => {
-        return cooworkService
+      return cooworkService
         .getAll()
         .pipe(
           catchError((err) => {
@@ -37,14 +37,59 @@ export function CooworkMethods() {
                 loading: false,
                 error: '',
                 success: true,
-                cooworks: cooworks,
+                cooworks: cooworks.map((coowork) => {
+                  return {
+                    ...initialState.cooworkList.cooworks[0],
+                    ...coowork,
+                  };
+                }),
               },
             });
           })
         )
         .subscribe();
-      }, 2000);
-      
     },
+    async getById(id: number) {
+      patchState(store, {
+        cooworkList: {
+          loading: true,
+          error: '',
+          success: false,
+          cooworks: [],
+          cooworkDetails: {}
+        },
+      });
+
+      return cooworkService
+      .getById(id)
+      .pipe(
+        catchError((err) => {
+          patchState(store, {
+            cooworkList: {
+              loading: true,
+              error: '',
+              success: false,
+              cooworks: [],
+              cooworkDetails: {}
+            },
+          });
+          return throwError(err);
+        }),
+        tap((cooworkDetail: cooworkDetails) => {
+          return patchState(store, {
+            cooworkList: {
+              loading: false,
+              error: '',
+              success: true,
+              cooworks: [],
+              cooworkDetails: cooworkDetail
+            },
+          });
+        })
+      )
+      .subscribe();
+    }
   }));
 }
+
+

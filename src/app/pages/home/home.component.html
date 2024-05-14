@@ -1,4 +1,6 @@
-<section class="homepage h-full min-h-screen flex flex-col bg-backGround p-5 mb-14" >
+<section
+  class="homepage h-full min-h-screen flex flex-col bg-backGround p-5"
+>
   <div
     class="header space-x-4 flex place-content-between items-center font-urbaninst text-primary mb-4"
   >
@@ -31,103 +33,80 @@
       />
     </button>
   </div>
-  <!-- // Todo: Categories -> Add the informations below to the database -->
+
   <div class="categories mt-4 text-primary">
     <h1 class="text-sm font-bold">Categories</h1>
 
     <div class="list-categories mt-2">
-
       <ul class="flex gap-2 text-sm">
-        @if(this.storeCoowork.cooworkList().loading) {
-          @for (item of [{}, {}, {}, {}, {}]; track $index) {
-            <p-skeleton width="7rem" height="2.5em" styleClass="mb-2" borderRadius="16px"></p-skeleton>
-          }
-        } @else {
-          <li class="flex bg-white rounded-4x2 gap-2 p-2">
-            <img
-              width="15px"
-              src="../../../assets/icons/coffee.svg"
-              alt="settings"
-            />
-  
-            <span class="text-primary">Coffee</span>
-          </li>
-          
-          <li class="flex bg-white rounded-4x2 gap-2 p-2">
-            <img
-              width="15px"
-              src="../../../assets/icons/meeting-room.svg"
-              alt="settings"
-            />
-  
-            <span class="text-primary">Metting Room</span>
-          </li>
+        @if(this.storeCoowork.cooworkList().loading) { @for (item of
+        skeletonsArray; track $index) {
+        <p-skeleton
+          width="7rem"
+          height="2.5em"
+          styleClass="mb-2"
+          borderRadius="16px"
+        ></p-skeleton>
+        } } @else { @for (coowork of getAllCategories(); track $index) {
+        <li class="flex bg-white rounded-4x2 gap-2 p-2">
+          <img width="15px" [src]="coowork.icon" alt="settings" />
 
-          <li class="flex bg-white rounded-4x2 gap-2 p-2">
-            <img
-              width="15px"
-              src="../../../assets/icons/meeting-room.svg"
-              alt="settings"
-            />
-  
-            <span class="text-primary">Metting Room</span>
-          </li>
-        }
+          <span class="text-primary">{{ coowork.categorie }}</span>
+        </li>
+        } }
       </ul>
     </div>
   </div>
 
-  <!-- TODO: Nearest spaces -> Add the informations below to the database -->
-  <!-- TODO: Create a component -->
-  <div class="nearest-spaces mt-4 text-primary">
+  <div class="nearest-spaces mt-4 text-primary" >
     <h1 class="text-sm font-bold">Nearest spaces</h1>
 
-    <ul class="flex flex-col gap-4 mt-2 md:flex-row items-center md:flex-wrap md:justify-center">
-      @if (this.storeCoowork.cooworkList().loading) {
-        @for (item of [{}, {}, {}, {}, {}]; track $index) {
-          <li class="flex w-full flex-col bg-white rounded-4x2 gap-2 p-3 max-w-96">
-            <p-skeleton class="w-full" height="13em" styleClass="mb-2" borderRadius="1em"></p-skeleton>
-            <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
-            <div class="flex justify-between">
-                <span class="text-sm text-gray opacity-40">
-                  <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
-                </span>
-                <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
-            </div>
-            <span class="text-sm font-light text-green">
-              <p-skeleton width="3rem" styleClass="mb-2"></p-skeleton>
-            </span>
-          </li>
-        }
+    <ul
+      class="flex flex-col gap-4 mt-2 md:flex-row items-center md:flex-wrap md:justify-center pb-14"
+    >
+      @if (this.storeCoowork.cooworkList().loading) { @for (item of
+      skeletonsArray; track $index) {
+      <li class="flex w-full flex-col bg-white rounded-4x2 gap-2 p-3 max-w-128">
+        <p-skeleton
+          class="w-full"
+          height="20em"
+          styleClass="mb-2"
+          borderRadius="1em"
+        ></p-skeleton>
+        <p-skeleton width="18rem" styleClass="mb-2"></p-skeleton>
+        <div class="flex justify-between">
+          <span class="text-sm text-gray opacity-40">
+            <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+          </span>
+          <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+        </div>
+        <span class="text-sm font-light text-green">
+          <p-skeleton width="3rem" styleClass="mb-2"></p-skeleton>
+        </span>
+      </li>
+      } } @else { @for (coowork of this.storeCoowork.cooworkList().cooworks;
+      track $index) {
+      <li class="flex w-full flex-col bg-white rounded-4x2 gap-2 p-3 max-w-128" (click)="redirectDeatils(coowork.id)">
+        <img
+          class="w-full h-80 rounded-4xl"
+          src="../../../assets/images/coowork-option.webp"
+          alt="coowork"
+        />
+        <h1 class="text-base font-bold">{{ coowork.name }}</h1>
+        <div class="flex justify-between">
+          <span class="text-sm text-gray opacity-40">
+            {{ getCategorieByCoowork(coowork.id) }}
+          </span>
 
-      } @else {
-        @for (coowork of this.storeCoowork.cooworkList().cooworks; track $index) {
-          <li class="flex w-full flex-col bg-white rounded-4x2 gap-2 p-3 max-w-96">
-            <img
-              class="w-full h-52 rounded-4xl"
-              src="../../../assets/images/coowork-option.webp"
-              alt="coowork"
-            />
-            <h1 class="text-base font-bold">{{coowork.name}}</h1>
-            <div class="flex justify-between">
-                <span class="text-sm text-gray opacity-40">
-                    Wifi • Coffee • Meeting Room
-                  </span>
-                  <span class="flex gap-1 text-sm text-yellow">
-                    <img
-                    width="10px"
-                    src="../../../assets/icons/star.svg"
-                    alt="star"
-                  />
-                    4.9
-                  </span>
-            </div>
-            <span class="text-sm font-light text-green">
-                R$ 125.00 / Hour
-            </span>
-          </li>
-        }
-      }
+          <span class="flex gap-1 text-sm text-yellow">
+            <img width="10px" src="../../../assets/icons/star.svg" alt="star" />
+            4.9
+          </span>
+        </div>
+        <span class="text-sm font-light text-green"> 
+          {{getDayPrices(coowork.id)}} Day </span>
+      </li>
+      } }
     </ul>
   </div>
 </section>

@@ -6,6 +6,10 @@ export interface Coowork {
     email: string;
     admImage: string;
     phoneNumber: string;
+    coffe: boolean;
+    meetingRoom: boolean;
+    safeBox: boolean;
+    dayPrices: number[];
     address: {
         id: number;
         road: string;

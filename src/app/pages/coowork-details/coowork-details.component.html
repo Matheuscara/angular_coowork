@@ -1,0 +1,65 @@
+<section
+  class="coowork-details h-full min-h-screen flex flex-col bg-backGround p-5"
+>
+  <app-nav-bar-return title="Coowork details"></app-nav-bar-return>
+
+  <div class="coowork-details__main">
+    @if (this.storeCoowork.cooworkList().loading) {
+    <p-skeleton
+      class="w-full"
+      height="20em"
+      styleClass="mb-2"
+      borderRadius="1em"
+    ></p-skeleton>
+    <p-skeleton width="18rem" height="2em" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="10rem" height="1em" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="8rem" height="1em" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="12rem" height="2em" styleClass="mt-10 mb-2"></p-skeleton>
+    <p-skeleton width="w-full" height="15em" styleClass="mb-2"></p-skeleton>
+    } @else {
+    <img
+      class="w-full h-80 rounded-4xl"
+      src="../../../assets/images/coowork-option.webp"
+      alt="coowork"
+    />
+    <div class="pt-5 pb-5">
+      <h1 class="text-base font-bold">
+        {{ this.storeCoowork.cooworkList().cooworkDetails.name }}
+      </h1>
+
+      <div class="flex justify-between pt-2 pb-5">
+        <span class="text-sm text-gray opacity-40">
+          {{
+            getCategorieByCoowork(
+              this.storeCoowork.cooworkList().cooworkDetails
+            )
+          }}
+        </span>
+
+        <span class="flex gap-1 text-sm text-yellow">
+          <img width="10px" src="../../../assets/icons/star.svg" alt="star" />
+          4.9
+        </span>
+      </div>
+
+      <div class="description pb-2">
+        <h1 class="text-base font-bold">
+          Space description
+        </h1>
+        <h3 class="text-base text-gray opacity-40 pt-2">
+          {{ this.storeCoowork.cooworkList().cooworkDetails.detail.description }}
+        </h3>
+      </div>
+
+      <div class="Location">
+        <h1 class="text-base font-bold">
+          Location
+        </h1>
+        <h3 class="text-base text-gray opacity-40 pt-2">
+          {{ this.storeCoowork.cooworkList().cooworkDetails.address }}
+        </h3>
+      </div>
+    </div>
+    }
+  </div>
+</section>
