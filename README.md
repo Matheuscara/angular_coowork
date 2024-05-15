@@ -1,4 +1,4 @@
-## Sonnar Clour
+## Sonar Cloud
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Matheuscara_angular_coowork&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Matheuscara_angular_coowork)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Matheuscara_angular_coowork&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Matheuscara_angular_coowork)
