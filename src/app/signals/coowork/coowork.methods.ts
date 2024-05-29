@@ -75,15 +75,18 @@ export function CooworkMethods() {
           return throwError(err);
         }),
         tap((cooworkDetail: cooworkDetails) => {
-          return patchState(store, {
+
+          patchState(store, (state) => ({
             cooworkList: {
+              ...state,
               loading: false,
               error: '',
               success: true,
-              cooworks: [],
               cooworkDetails: cooworkDetail
             },
-          });
+          }));
+          patchState(store, { error: true });
+
         })
       )
       .subscribe();

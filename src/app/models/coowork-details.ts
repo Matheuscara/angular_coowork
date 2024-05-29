@@ -1,3 +1,5 @@
+import { Place } from "./place";
+
 export interface cooworkDetails {
     id: number;
     name: string;
@@ -13,17 +15,11 @@ export interface cooworkDetails {
       phone_number: number;
       opening_hours: number;
       closer_hours: number;
-      coffe_shop: boolean;
+      coffee_shop: boolean;
       safe_box: boolean;
       meeting_room: boolean;
     };
-    places: {
-      id: number;
-      type: string;
-      capacity: number;
-      image: string | null;
-      day_price: number;
-    }[];
+    places: Place[];
     address: {
       id: number;
       road: string;
@@ -34,8 +30,10 @@ export interface cooworkDetails {
       country: string;
       number: string;
       complement: string;
+      lat: number;
+      lon: number;
     };
-    coffe: boolean;
+    coffee: boolean;
     safeBox: boolean;
     meetingRoom: boolean;
   }

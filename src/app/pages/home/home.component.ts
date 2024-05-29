@@ -28,6 +28,7 @@ import { Coowork } from '../../models/coowork';
     StatusBarComponent,
     SkeletonModule,
   ],
+  providers: [UserStore, CooworkStore]
 })
 export class HomeComponent implements OnInit {
   readonly storeUser = inject(UserStore);
@@ -65,7 +66,7 @@ export class HomeComponent implements OnInit {
     
     const categories = [];
     
-    if (coowork.coffe) categories.push('Coffee');
+    if (coowork.coffee) categories.push('coffee');
     if (coowork.meetingRoom) categories.push('Meeting Room');
     if (coowork.safeBox) categories.push('Safe Box');
 

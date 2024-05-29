@@ -3,7 +3,6 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import {
-  HTTP_INTERCEPTORS,
   provideHttpClient,
   withFetch,
   withInterceptorsFromDi,
@@ -19,7 +18,3 @@ export const appConfig: ApplicationConfig = {
     UserService,
   ],
 };
-
-
-//add intercptor 
-// { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,6 +1,15 @@
+
 /* You can add global styles to this file, and also import other style files */
 body {
     height: 100%;
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 254 / var(--tw-bg-opacity)) 
+}
+
+input {
+    padding: 1em !important; 
+    width: 100% !important;
+    border: 1px solid #d1d1d1 !important;
 }
 
 @tailwind base;

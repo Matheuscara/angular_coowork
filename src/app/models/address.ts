@@ -8,4 +8,6 @@ export interface Address {
     country: string;
     number: string;
     complement: string;
+    lat: number;
+    lon: number;
 }

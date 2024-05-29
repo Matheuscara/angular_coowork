@@ -1,7 +1,7 @@
 <section
-  class="coowork-details h-full min-h-screen flex flex-col bg-backGround p-5"
+  class="coowork-details h-full min-h-screen flex flex-col p-4 pb-16"
 >
-  <app-nav-bar-return title="Coowork details"></app-nav-bar-return>
+  <app-nav-bar-return title="Coowork details" [share]="share"></app-nav-bar-return>
 
   <div class="coowork-details__main">
     @if (this.storeCoowork.cooworkList().loading) {
@@ -22,44 +22,70 @@
       src="../../../assets/images/coowork-option.webp"
       alt="coowork"
     />
-    <div class="pt-5 pb-5">
-      <h1 class="text-base font-bold">
-        {{ this.storeCoowork.cooworkList().cooworkDetails.name }}
+    <div>
+      <h1 class="text-xl font-bold mt-5 mb-2">
+        {{ this.cooworkDetails().name }}
       </h1>
 
-      <div class="flex justify-between pt-2 pb-5">
-        <span class="text-sm text-gray opacity-40">
-          {{
-            getCategorieByCoowork(
-              this.storeCoowork.cooworkList().cooworkDetails
-            )
-          }}
-        </span>
-
-        <span class="flex gap-1 text-sm text-yellow">
-          <img width="10px" src="../../../assets/icons/star.svg" alt="star" />
-          4.9
+      <div class="flex items-center justify-between">
+        <span class="text-base text-primary opacity-40">
+          {{ getCategorieByCoowork(this.cooworkDetails()) }}
         </span>
       </div>
 
-      <div class="description pb-2">
-        <h1 class="text-base font-bold">
-          Space description
-        </h1>
-        <h3 class="text-base text-gray opacity-40 pt-2">
-          {{ this.storeCoowork.cooworkList().cooworkDetails.detail.description }}
+      <div class="description">
+        <h1 class="text-base font-bold mt-5 mb-2">Space description</h1>
+        <h3 class="text-base text-primary opacity-40">
+          {{ this.cooworkDetails().detail.description }}
         </h3>
       </div>
 
-      <div class="Location">
-        <h1 class="text-base font-bold">
-          Location
-        </h1>
-        <h3 class="text-base text-gray opacity-40 pt-2">
-          {{ this.storeCoowork.cooworkList().cooworkDetails.address }}
-        </h3>
+      <div class="Location text-base">
+        <h1 class="font-bold mt-5 mb-2">Location</h1>
+        <div class="text-primary opacity-40">
+          <h3 class="">
+            City: {{ address().city }} / Country: {{ address().country }}
+          </h3>
+          <h3 class="">
+            Road: {{ address().road }} / Number:
+            {{ address().number }}
+          </h3>
+          <h3 class="mb-5">Complement: {{ address().complement }}</h3>
+        </div>
+        <google-map height="270px" width="w-full" [options]="optionsMap">
+          <map-marker [position]="markerPositions" [options]="optionsMap" />
+        </google-map>
       </div>
+
+      <h1 class="font-bold text-base mt-5 mb-2">Spaces</h1>
+
+      @for (place of this.cooworkDetails().places; track $index) {
+      <div
+        (click)="redirectToSchedule(place.id)"
+        onkeypress="redirectToSchedule(place.id)"
+        class="rounded-4x2 mb-5 bg-white border-gray border-opacity-10 border"
+      >
+        <img
+          class="w-full h-52 rounded-t-2xl"
+          src="../../../assets/images/coowork-option.webp"
+          alt="coowork"
+        />
+        <div class="p-2 rounded-b-2xl">
+          <h1 class="font-medium text-base">{{ place.type }}</h1>
+          <div class="flex justify-between pr-2 pb-2 pt-2">
+            <span class="text-sm font-light text-green"
+              >R$ {{ place.day_price }} Day</span
+            >
+            <img
+              src="../../../assets/icons/seta-direita.svg"
+              alt="arrow-right"
+            />
+          </div>
+        </div>
+      </div>
+      }
     </div>
     }
   </div>
 </section>
+<app-status-bar></app-status-bar>
