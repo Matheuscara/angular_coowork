@@ -40,7 +40,7 @@ describe('LoginComponent', () => {
   });
 
   it('login should be call login', () => {
-    spyOn(userService, 'postLogin');
+    spyOn(component.userService, 'postLogin').and.returnValue(of());
 
     component.login();
 

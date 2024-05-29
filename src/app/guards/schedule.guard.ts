@@ -5,7 +5,6 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
 } from '@angular/router';
-import { CooworkStore, initialState } from '../signals/coowork/coowork.state';
 
 @Injectable({
   providedIn: 'root',

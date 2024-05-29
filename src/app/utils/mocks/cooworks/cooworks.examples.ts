@@ -74,7 +74,7 @@ export const getByIdCooworkMock: getByIdDtoResponse = {
     id: 1,
     road: 'RuaABC',
     neighborhood: 'BairroXYZ',
-    zip_code: 12345678,
+    zip_code: "12345678",
     city: 'CidadeA',
     state: 'Estado X',
     country: 'País P',

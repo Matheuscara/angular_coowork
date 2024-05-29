@@ -1,6 +1,5 @@
 import { User } from "../../../models/user";
 
-export interface UserDtoRepsonse {
-    user: User;
+export interface UserDtoRepsonse extends User {
   }
   

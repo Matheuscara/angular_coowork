@@ -4,7 +4,6 @@ import { CalendarModule, Month } from 'primeng/calendar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { cooworkDetails } from '../../models/coowork-details';
-import { CooworkStore } from '../../signals/coowork/coowork.state';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Place } from '../../models/place';
 import { StatusBarComponent } from '../../components/status-bar/status-bar.component';
@@ -24,9 +23,8 @@ import { StatusBarComponent } from '../../components/status-bar/status-bar.compo
   ],
 })
 export class ScheduleComponent implements OnInit {
-  readonly storeCoowork = inject(CooworkStore);
-  address = this.storeCoowork.cooworkDetailsLocation();
-  cooworkDetails = this.storeCoowork.cooworkDetails();
+  // address = this.storeCoowork.cooworkDetailsLocation();
+  // cooworkDetails = this.storeCoowork.cooworkDetails();
   place!: Place;
   share = false;
 
@@ -43,7 +41,7 @@ export class ScheduleComponent implements OnInit {
     private router: Router,
     private viewportScroller: ViewportScroller
   ) {
-    console.log(this.storeCoowork.cooworkList())
+    // console.log(this.storeCoowork.cooworkList())
     this.url.params.subscribe((params) => {
       this.setPlace(params['squeduleId']);
     });
@@ -58,12 +56,12 @@ export class ScheduleComponent implements OnInit {
   }
 
   setPlace(id: string) {
-    const place = this.storeCoowork
-      .cooworkDetails()
-      .places.find((place) => place.id === Number(id));
+    // const place = this.storeCoowork
+    //   .cooworkDetails()
+    //   .places.find((place) => place.id === Number(id));
 
-    if (place) {
-      this.place = place;
-    }
+    // if (place) {
+    //   this.place = place;
+    // }
   }
 }

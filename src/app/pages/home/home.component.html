@@ -39,7 +39,7 @@
 
     <div class="list-categories mt-2">
       <ul class="flex gap-2 text-sm">
-        @if(this.storeCoowork.cooworkList().loading) { @for (item of
+        @if(!this.cooworkSubjectService.load()) { @for (item of
         skeletonsArray; track $index) {
         <p-skeleton
           width="7rem"
@@ -64,7 +64,7 @@
     <ul
       class="flex flex-col gap-4 mt-2 md:flex-row items-center md:flex-wrap md:justify-start pb-14"
     >
-      @if (this.storeCoowork.cooworkList().loading) { @for (item of
+      @if (!this.cooworkSubjectService.load()) { @for (item of
       skeletonsArray; track $index) {
       <li class="flex w-full flex-start bg-white rounded-4x2 gap-2 p-3 max-w-128">
         <p-skeleton
@@ -84,7 +84,7 @@
           <p-skeleton width="3rem" styleClass="mb-2"></p-skeleton>
         </span>
       </li>
-      } } @else { @for (coowork of this.storeCoowork.cooworkList().cooworks;
+      } } @else { @for (coowork of this.cooworkSubjectService.allcooworks();
       track $index) {
       <li (keypress)="coowork.id" class="flex w-full flex-col bg-white rounded-4x2 gap-2 p-3 max-w-128" (click)="redirectDeatils(coowork.id)">
         <img
@@ -95,7 +95,7 @@
         <h1 class="text-base font-bold">{{ coowork.name }}</h1>
         <div class="flex justify-between">
           <span class="text-sm text-gray opacity-40">
-            {{ getCategorieByCoowork(coowork.id, this.storeCoowork.cooworkList().cooworks) }}
+            {{ getCategorieByCoowork(coowork.id, this.cooworkSubjectService.allcooworks()) }}
           </span>
 
           <span class="flex gap-1 text-sm text-yellow">
@@ -104,7 +104,7 @@
           </span>
         </div>
         <span class="text-sm font-light text-green"> 
-          {{getDayPrices(coowork.id, this.storeCoowork.cooworkList().cooworks)}} Day </span>
+          {{getDayPrices(coowork.id, this.cooworkSubjectService.allcooworks())}} Day </span>
       </li>
       } }
     </ul>

@@ -152,10 +152,10 @@
         />
       </div>
 
-      @if (this.store.createUser().loading) {
+      @if (this.loading()) {
       <app-button
         onkeypress="submit()"
-        [disabled]="this.form.invalid || this.store.createUser().loading"
+        [disabled]="this.form.invalid || this.loading()"
         (click)="submit()"
         class="mt-4 rounded-none rounded-t-lg"
         id="login"
@@ -170,7 +170,7 @@
       } @else {
       <app-button
         onkeypress="submit()"
-        [disabled]="this.form.invalid || this.store.createUser().loading"
+        [disabled]="this.form.invalid || this.loading()"
         (click)="submit()"
         class="mt-4"
         id="login"

@@ -1,0 +1,47 @@
+import { cooworkDetails } from '../../models/coowork-details';
+
+export const cooworkStateInitial: cooworkDetails = {
+  id: 0,
+  name: '',
+  imageCoowork: '',
+  administrator: '',
+  email: '',
+  admImage: '',
+  phoneNumber: '',
+  detail: {
+    id: 0,
+    description: '',
+    cnpj: 0,
+    phone_number: 0,
+    opening_hours: 0,
+    closer_hours: 0,
+    coffee_shop: false,
+    safe_box: false,
+    meeting_room: false,
+  },
+  places: [
+    {
+      id: 0,
+      type: '',
+      capacity: 0,
+      image: '',
+      day_price: 0.0,
+    },
+  ],
+  address: {
+    id: 0,
+    road: '',
+    neighborhood: '',
+    zip_code: '',
+    city: '',
+    state: '',
+    country: '',
+    number: '',
+    complement: '',
+    lat: 0.0,
+    lon: 0.0,
+  },
+  coffee: false,
+  safeBox: false,
+  meetingRoom: false,
+};

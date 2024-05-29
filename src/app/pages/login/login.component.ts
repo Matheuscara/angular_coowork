@@ -1,14 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  effect,
   inject,
+  signal,
 } from '@angular/core';
 import { InputComponent } from '../../components/input/input.component';
 import { ButtonComponent } from '../../components/button/button.component';
 import { SeparateComponent } from '../../components/separate/separate.component';
 import { Router } from '@angular/router';
-import { UserStore } from '../../signals/user/user.state';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import {
   FormBuilder,
@@ -18,9 +17,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { showAlert } from '../../utils/utils';
+import { setAccessToken, showAlert } from '../../utils/utils';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { UserService } from '../../services/user.service';
+import { LoginDtoResponse } from '../../services/user/dtos/login.dto.response';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +44,8 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  readonly userStore = inject(UserStore);
+  readonly userService = inject(UserService);
+  public loading = signal(false);
 
   form: FormGroup = new FormGroup({});
 
@@ -69,29 +71,33 @@ export class LoginComponent {
         },
       ],
     });
-
-    effect(() => {
-      if (this.userStore.login().success) {
-        this.router.navigate(['/home']);
-      }
-
-      if (this.userStore.login().error) {
-        this.form.reset();
-        showAlert(
-          'error',
-          'Error',
-          this.userStore.login().error,
-          this.messageService
-        );
-      }
-    });
   }
 
   login() {
-    this.userStore.postLogin({
-      email: this.form.value.email,
-      password: this.form.value.password,
-    });
+    this.loading.set(true);
+    this.userService
+      .postLogin({
+        email: this.form.value.email,
+        password: this.form.value.password,
+      })
+      .subscribe(
+        (response: LoginDtoResponse) => {
+          this.userService.accessToken = response.accessToken;
+          setAccessToken(response.accessToken);
+          this.loading.set(false);
+          this.router.navigate(['/home']);
+        },
+        (error) => {
+          this.loading.set(false);
+          this.form.reset();
+          showAlert(
+            'error',
+            'Error',
+            error.error.message,
+            this.messageService
+          );
+        }
+      );
   }
 
   redirectRegisterAcount() {

@@ -1,16 +1,12 @@
 import { Component, effect, inject } from '@angular/core';
 import { NavBarReturnComponent } from '../../components/nav-bar-return/nav-bar-return.component';
-import {
-  CooworkStore,
-  initialState,
-} from '../../signals/coowork/coowork.state';
-import { Coowork } from '../../models/coowork';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SkeletonModule } from 'primeng/skeleton';
 import { cooworkDetails } from '../../models/coowork-details';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { CommonModule } from '@angular/common';
 import { StatusBarComponent } from '../../components/status-bar/status-bar.component';
+import { CooworkDetailsSubjectService } from '../../signalsSubject/cooworkDetails/coowork-signals-service';
 
 @Component({
   selector: 'app-coowork-details',
@@ -24,29 +20,29 @@ import { StatusBarComponent } from '../../components/status-bar/status-bar.compo
     GoogleMapsModule,
     StatusBarComponent,
   ],
-  providers: [CooworkStore]
 })
 export class CooworkDetailsComponent {
-  readonly storeCoowork = inject(CooworkStore);
-  address = () => this.storeCoowork.cooworkList().cooworkDetails.address;
-  cooworkDetails = () => this.storeCoowork.cooworkList().cooworkDetails;
+  readonly coworkDetailsSubjectService = inject(CooworkDetailsSubjectService);
+
+  address = () => this.coworkDetailsSubjectService.cooworkDetail().address;
+  cooworkDetails = () => this.coworkDetailsSubjectService.cooworkDetail();
+
   share = true;
-  cowork: Coowork = initialState.cooworkList.cooworks[0];
 
   optionsMap: google.maps.MapOptions = {
     disableDefaultUI: true,
   };
-  
-  markerPositions: google.maps.LatLngLiteral = {  lat: 0, lng: 0 };
+
+  markerPositions: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
 
   constructor(private url: ActivatedRoute, private router: Router) {
     this.url.params.subscribe((params) => {
       const id = Number(params['id']);
-      this.storeCoowork.getById(id);
+      this.coworkDetailsSubjectService.loadInitCooworkDetails(id);
     });
 
     effect(() => {
-      if (this.storeCoowork.cooworkList().success) {
+      if (this.coworkDetailsSubjectService.load()) {
         this.optionsMap.center = {
           lat: this.cooworkDetails().address.lat,
           lng: this.cooworkDetails().address.lon,
@@ -54,7 +50,6 @@ export class CooworkDetailsComponent {
         this.optionsMap.zoom = 20;
         this.markerPositions = this.optionsMap.center;
       }
-      console.log(this.storeCoowork.cooworkList())
     });
   }
 
@@ -71,8 +66,11 @@ export class CooworkDetailsComponent {
   }
 
   redirectToSchedule(placeId: number) {
-    this.router.navigateByUrl('home/details/'+ this.cooworkDetails().id + '/squedule/' + placeId, {
-      state: { coowork: this.cooworkDetails() },
-    });
+    this.router.navigateByUrl(
+      'home/details/' + this.cooworkDetails().id + '/squedule/' + placeId,
+      {
+        state: { coowork: this.cooworkDetails() },
+      }
+    );
   }
 }
