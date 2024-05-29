@@ -1,15 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CooworkDetailsComponent } from './coowork-details.component';
 import { CooworkService } from '../../services/coowork.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  getAllCooworksMock,
-  getByIdCooworkMock,
-} from '../../utils/mocks/cooworks/cooworks.examples';
+import { getByIdCooworkMock } from '../../utils/mocks/cooworks/cooworks.examples';
 import { of } from 'rxjs';
-import { HttpClientModule } from '@angular/common/http';
-import { CooworkStore } from '../../signals/coowork/coowork.state';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { CommonModule } from '@angular/common';
 import { SkeletonModule } from 'primeng/skeleton';

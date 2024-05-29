@@ -3,6 +3,7 @@
     class="w-full border-none transition hover:bg-opacity-90 text-white bg-primary pt-2 pb-2 rounded-4x0 flex justify-center"
     [class]="class"
     [disabled]="disabled"
+    (click)="onClick.emit($event)"
     [ngClass]="{
       'bg-opacity-80': disabled
     }"

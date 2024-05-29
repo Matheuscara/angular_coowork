@@ -1,9 +1,4 @@
-export interface getAllDtoResponse {
-    id: number;
-    name: string;
-    imageCoowork: string;
-    coffee: boolean;
-    meetingRoom: boolean;
-    safeBox: boolean;
-    dayPrices: Number[];
+import { Coowork } from "../../../models/coowork";
+
+export interface getAllDtoResponse extends Coowork {
 }

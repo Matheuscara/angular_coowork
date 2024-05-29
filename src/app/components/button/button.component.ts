@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -14,7 +14,8 @@ export class ButtonComponent {
   @Input() label: string;
   @Input() class: string ;
   @Input() disabled?: boolean = false;
-
+  @Output() onClick: EventEmitter<any> = new EventEmitter<any>();
+  
   constructor() {
     this.id = '';
     this.label = '';

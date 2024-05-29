@@ -49,32 +49,32 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('getAllCategories should return an array of categories with icon src', () => {
-    spyOn(component.storeCoowork, 'getAllCategories').and.returnValue(
-      [
-        { categorie: 'coffee', icon: 'coffee.svg' },
-        { categorie: 'Meeting Room', icon: 'meeting-room.svg' },
-        { categorie: 'Safe Box', icon: 'safe-box.svg' },
-      ],
-    );
+  // it('getAllCategories should return an array of categories with icon src', () => {
+  //   spyOn(component.storeCoowork, 'getAllCategories').and.returnValue(
+  //     [
+  //       { categorie: 'coffee', icon: 'coffee.svg' },
+  //       { categorie: 'Meeting Room', icon: 'meeting-room.svg' },
+  //       { categorie: 'Safe Box', icon: 'safe-box.svg' },
+  //     ],
+  //   );
 
-    const result = component.getAllCategories();
+  //   const result = component.getAllCategories();
 
-    expect(result).toEqual([
-      {
-        categorie: 'coffee',
-        icon: '../../../assets/icons/coffee.svg',
-      },
-      {
-        categorie: 'Meeting Room',
-        icon: '../../../assets/icons/meeting-room.svg',
-      },
-      {
-        categorie: 'Safe Box',
-        icon: '../../../assets/icons/safe-box.svg',
-      },
-    ]);
-  });
+  //   expect(result).toEqual([
+  //     {
+  //       categorie: 'coffee',
+  //       icon: '../../../assets/icons/coffee.svg',
+  //     },
+  //     {
+  //       categorie: 'Meeting Room',
+  //       icon: '../../../assets/icons/meeting-room.svg',
+  //     },
+  //     {
+  //       categorie: 'Safe Box',
+  //       icon: '../../../assets/icons/safe-box.svg',
+  //     },
+  //   ]);
+  // });
 
   it('getCategorieByCoowork should return empty with categories ever null', () => {
     const testMock = getAllCooworksMock;

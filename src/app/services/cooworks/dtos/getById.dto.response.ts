@@ -28,7 +28,7 @@ export interface getByIdDtoResponse {
       id: number;
       road: string;
       neighborhood: string;
-      zip_code: number;
+      zip_code: string;
       city: string;
       state: string;
       country: string;

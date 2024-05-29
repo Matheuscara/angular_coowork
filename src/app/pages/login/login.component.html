@@ -36,11 +36,11 @@
       </form>
     </div>
 
-    @if (this.userStore.login().loading) {
+    @if (this.loading()) {
     <app-button
-      onkeypress="login()"
-      [disabled]="this.form.invalid || this.userStore.login().loading"
-      (click)="login()"
+      onkeypress="()=>{}"
+      [disabled]="this.form.invalid || this.loading()"
+      (onClick)="login()"
       class="mt-4 rounded-none rounded-t-lg"
       id="login"
       >Login account</app-button
@@ -53,15 +53,14 @@
     ></p-progressBar>
     } @else {
     <app-button
-      onkeypress="login()"
-      [disabled]="this.form.invalid || this.userStore.login().loading"
-      (click)="login()"
+      onkeypress="()=>{}"
+      [disabled]="this.form.invalid || this.loading()"
+      (onClick)="login()"
       class="mt-4"
       id="login"
       >Login account</app-button
     >
     }
-
     <h3 class="pt-2 flex justify-end">
       Dont have account?<span
         onkeypress="redirectRegisterAcount()"

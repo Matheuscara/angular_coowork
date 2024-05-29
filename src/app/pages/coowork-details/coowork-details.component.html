@@ -4,7 +4,7 @@
   <app-nav-bar-return title="Coowork details" [share]="share"></app-nav-bar-return>
 
   <div class="coowork-details__main">
-    @if (this.storeCoowork.cooworkList().loading) {
+    @if (!this.coworkDetailsSubjectService.load()) {
     <p-skeleton
       class="w-full"
       height="20em"

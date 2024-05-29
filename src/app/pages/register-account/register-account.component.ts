@@ -2,14 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
-  ViewEncapsulation,
-  effect,
   inject,
+  signal,
 } from '@angular/core';
 import { ButtonComponent } from '../../components/button/button.component';
 import { InputComponent } from '../../components/input/input.component';
 import { SeparateComponent } from '../../components/separate/separate.component';
-import { UserStore } from '../../signals/user/user.state';
 import { Router } from '@angular/router';
 import {
   FormBuilder,
@@ -27,6 +25,7 @@ import { MessageService } from 'primeng/api';
 import { validateCpf, validatePhoneNumber } from '../../utils/validators';
 import { showAlert } from '../../utils/utils';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register-account',
@@ -50,7 +49,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
   styleUrl: './register-account.component.scss',
 })
 export class RegisterAccountComponent implements OnInit {
-  readonly store = inject(UserStore);
+  readonly userService = inject(UserService);
+  public loading = signal(false);
 
   form: FormGroup = new FormGroup({});
   alert: boolean = false;
@@ -134,27 +134,54 @@ export class RegisterAccountComponent implements OnInit {
       ],
     });
 
-    effect(() => {
-      if (this.store.createUser().success) {
-        this.router.navigate(['/login']);
-      }
+    // effect(() => {
+    //   if (this.userService.postCreateUser().success) {
+    //     this.router.navigate(['/login']);
+    //   }
 
-      if (this.store.createUser().error) {
-        showAlert(
-          'error',
-          'Error',
-          this.store.createUser().error,
-          this.messageService
-        );
-      }
-    });
+    //   if (this.store.createUser().error) {
+    //     showAlert(
+    //       'error',
+    //       'Error',
+    //       this.store.createUser().error,
+    //       this.messageService
+    //     );
+    //   }
+    // });
   }
 
   ngOnInit(): void {
-    this.store.resetCreated();
+    this.form.reset();
+  }
+
+  validationCreateUser(form: any) {
+    if (!validateCpf(form.cpf)) {
+      this.form.get('cpf')?.setErrors({ invalid: true });
+      throw new Error('Cpf invalid.');
+    }
+
+    if (!validatePhoneNumber(form.phoneNumber)) {
+      this.form.get('phoneNumber')?.setErrors({ invalid: true });
+      throw new Error('Phone invalid.');
+    }
+
+    if (form.password !== form.passwordConfirmation) {
+      this.form.get('password')?.setErrors({ invalid: true });
+      this.form.get('passwordConfirmation')?.setErrors({ invalid: true });
+      throw new Error('Passwords must be the same.');
+    }
+
+    Object.keys(form).forEach((key) => {
+      if (form[key] === null || form[key] === '') {
+        delete form[key];
+      }
+    });
+
+    return form
   }
 
   submit() {
+    this.loading.set(true);
     try {
       let form = this.form.getRawValue();
 
@@ -164,33 +191,15 @@ export class RegisterAccountComponent implements OnInit {
       form.cpf = form.cpf.replace(/\D/g, '');
       form.birthDate = form.birthDate.toISOString().split('T')[0];
 
-      if (!validateCpf(form.cpf)) {
-        this.form.get('cpf')?.setErrors({ invalid: true });
-        throw new Error('Cpf invalid.');
-      }
+      form = this.validationCreateUser(form);
 
-      if (!validatePhoneNumber(form.phoneNumber)) {
-        this.form.get('phoneNumber')?.setErrors({ invalid: true });
-        throw new Error('Phone invalid.');
-      }
-
-      if (form.password !== form.passwordConfirmation) {
-        this.form.get('password')?.setErrors({ invalid: true });
-        this.form.get('passwordConfirmation')?.setErrors({ invalid: true });
-        throw new Error('Passwords must be the same.');
-      }
-
-      Object.keys(form).forEach((key) => {
-        if (form[key] === null || form[key] === '') {
-          delete form[key];
-        }
+      this.userService.postCreateUser(form).subscribe(() => {
+        this.loading.set(false);
+        this.router.navigate(['/login']);
       });
-
-
-
-      this.store.postCreateUser(form);
     } catch (error: any) {
       showAlert('error', 'Error', error.message, this.messageService);
+      this.loading.set(false);
     }
   }
 
