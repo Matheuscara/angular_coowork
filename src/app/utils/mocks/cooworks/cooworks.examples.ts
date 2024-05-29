@@ -80,6 +80,8 @@ export const getByIdCooworkMock: getByIdDtoResponse = {
     country: 'País P',
     number: '123',
     complement: 'Apartamento 101',
+    lat: 0,
+    lon: 0,
   },
   coffee: true,
   safeBox: true,

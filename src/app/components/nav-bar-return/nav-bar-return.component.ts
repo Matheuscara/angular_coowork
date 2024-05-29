@@ -9,8 +9,8 @@ import { Location } from '@angular/common';
   styleUrl: './nav-bar-return.component.scss'
 })
 export class NavBarReturnComponent {
-  share = input.required<boolean>();
-  @Input() title: string = "";
+  share = input<boolean>(false);
+  title = input("");
 
   constructor(private location: Location) {}
 
