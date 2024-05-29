@@ -6,7 +6,9 @@
 
 ::ng-deep {
   .p-inputtext {
+    padding: 0.5em;
     width: 100%;
+    border: 1px solid rgb(218 218 218 / var(--tw-border-opacity));
   }
 
   .p-inputtext:hover {

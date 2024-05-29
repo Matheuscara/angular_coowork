@@ -13,7 +13,7 @@ export interface getByIdDtoResponse {
       phone_number: number;
       opening_hours: number;
       closer_hours: number;
-      coffe_shop: boolean;
+      coffee_shop: boolean;
       safe_box: boolean;
       meeting_room: boolean;
     };
@@ -34,8 +34,10 @@ export interface getByIdDtoResponse {
       country: string;
       number: string;
       complement: string;
+      lat: number;
+      lon: number;
     };
-    coffe: boolean;
+    coffee: boolean;
     safeBox: boolean;
     meetingRoom: boolean;
   }

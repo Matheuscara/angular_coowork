@@ -1,5 +1,5 @@
 <section
-  class="homepage h-full min-h-screen flex flex-col bg-backGround p-5"
+  class="homepage h-full min-h-screen flex flex-col p-4"
 >
   <div
     class="header space-x-4 flex place-content-between items-center font-urbaninst text-primary mb-4"
@@ -62,11 +62,11 @@
     <h1 class="text-sm font-bold">Nearest spaces</h1>
 
     <ul
-      class="flex flex-col gap-4 mt-2 md:flex-row items-center md:flex-wrap md:justify-center pb-14"
+      class="flex flex-col gap-4 mt-2 md:flex-row items-center md:flex-wrap md:justify-start pb-14"
     >
       @if (this.storeCoowork.cooworkList().loading) { @for (item of
       skeletonsArray; track $index) {
-      <li class="flex w-full flex-col bg-white rounded-4x2 gap-2 p-3 max-w-128">
+      <li class="flex w-full flex-start bg-white rounded-4x2 gap-2 p-3 max-w-128">
         <p-skeleton
           class="w-full"
           height="20em"

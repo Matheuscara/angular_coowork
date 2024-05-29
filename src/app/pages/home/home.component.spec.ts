@@ -52,7 +52,7 @@ describe('HomeComponent', () => {
   it('getAllCategories should return an array of categories with icon src', () => {
     spyOn(component.storeCoowork, 'getAllCategories').and.returnValue(
       [
-        { categorie: 'Coffe', icon: 'coffee.svg' },
+        { categorie: 'coffee', icon: 'coffee.svg' },
         { categorie: 'Meeting Room', icon: 'meeting-room.svg' },
         { categorie: 'Safe Box', icon: 'safe-box.svg' },
       ],
@@ -62,7 +62,7 @@ describe('HomeComponent', () => {
 
     expect(result).toEqual([
       {
-        categorie: 'Coffe',
+        categorie: 'coffee',
         icon: '../../../assets/icons/coffee.svg',
       },
       {
@@ -78,7 +78,7 @@ describe('HomeComponent', () => {
 
   it('getCategorieByCoowork should return empty with categories ever null', () => {
     const testMock = getAllCooworksMock;
-    testMock[0].coffe = false;
+    testMock[0].coffee = false;
     testMock[0].meetingRoom = false;
     testMock[0].safeBox = false;
 
@@ -90,18 +90,18 @@ describe('HomeComponent', () => {
 
   it('getCategorieByCoowork should return a category by coowork id', () => {
     const test = getAllCooworksMock
-    getAllCooworksMock[0].coffe = true;
+    getAllCooworksMock[0].coffee = true;
     getAllCooworksMock[0].meetingRoom = true;
     getAllCooworksMock[0].safeBox = true;
 
     const resultBy = component.getCategorieByCoowork(1, test);
 
-    expect(resultBy).toEqual('Coffee • Meeting Room • Safe Box');
+    expect(resultBy).toEqual('coffee • Meeting Room • Safe Box');
   });
 
   it('getCategorieByCoowork should return empty', () => {
     const testMock = getAllCooworksMock;
-    testMock[0].coffe = false;
+    testMock[0].coffee = false;
     testMock[0].meetingRoom = false;
     testMock[0].safeBox = false;
 

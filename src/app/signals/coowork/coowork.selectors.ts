@@ -9,8 +9,8 @@ export function CooworkSelectors() {
       getAllCategories: computed(() => {
         let categories: { categorie: string; icon: string }[] = [];
         state.cooworkList.cooworks().map((coowork) => {
-          if (coowork.coffe)
-            categories.push({ categorie: 'Coffe', icon: 'coffee.svg' });
+          if (coowork.coffee)
+            categories.push({ categorie: 'coffee', icon: 'coffee.svg' });
           if (coowork.meetingRoom)
             categories.push({ categorie: 'Meeting Room', icon: 'meeting-room.svg' });
           if (coowork.safeBox)
@@ -22,6 +22,8 @@ export function CooworkSelectors() {
         );
         return categories;
       }),
+      cooworkDetails: computed(() => state.cooworkList.cooworkDetails()),
+      cooworkDetailsLocation: computed(() => state.cooworkList.cooworkDetails().address),
     }))
   );
 }

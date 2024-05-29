@@ -8,8 +8,10 @@
             {{title}}
         </div>
 
-        <div>
-            <img src="../../../assets/icons/share.svg" alt="share-coowork" />
-        </div>
+        @if (this.share()) {
+            <div>
+                <img src="../../../assets/icons/share.svg" alt="share-coowork" />
+            </div>
+        }
     </div>
 </section>

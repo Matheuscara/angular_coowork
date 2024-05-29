@@ -1,0 +1,55 @@
+<section class="coowork-schedule h-full flex flex-col p-4">
+  <app-nav-bar-return
+    title="Schedule a service"
+    [share]="share"
+  ></app-nav-bar-return>
+  <p class="text-xl pt-3 pb-3 text-primary opacity-40">
+    Select the date you would like to reserve your coworking space
+  </p>
+
+  <p class="text-primary text-base font-bold mb-2">Reserve date</p>
+  <p-calendar [(ngModel)]="date" dateFormat="dd/mm/yy" [touchUI]="true" [readonlyInput]="true" />
+
+  <div class="description">
+    <h1 class="text-base font-bold mt-5 mb-2">Space description</h1>
+    <h3 class="text-base text-primary opacity-40">
+      {{ this.cooworkDetails.detail.description }}
+    </h3>
+  </div>
+
+  <div class="Place">
+    <h1 class="text-base font-bold mt-5 mb-2">Day price</h1>
+    <h3 class="text-base text-primary opacity-40">
+      R$: {{ this.place.day_price }}.00 reais
+    </h3>
+    <h1 class="text-base font-bold mt-5 mb-2">Type</h1>
+    <h3 class="text-base text-primary opacity-40">
+      {{ this.place.type.replace("_", " ") }}
+    </h3>
+    <h1 class="text-base font-bold mt-5 mb-2">Capacity</h1>
+    <h3 class="text-base text-primary opacity-40">
+      {{ this.place.capacity }} Peoples
+    </h3>
+  </div>
+
+  <div class="Location text-base">
+    <h1 class="font-bold mt-5 mb-2">Location</h1>
+    <div class="text-primary opacity-40">
+      <h3 class="">
+        City: {{ address.city }} / Country: {{ address.country }}
+      </h3>
+      <h3 class="">
+        Road: {{ address.road }} / Number:
+        {{ address.number }}
+      </h3>
+      <h3 class="mb-5">Complement: {{ address.complement }}</h3>
+    </div>
+  </div>
+
+  <img
+    class="w-full h-80 rounded-4xl"
+    src="../../../assets/images/coowork-option.webp"
+    alt="coowork"
+  />
+</section>
+<app-status-bar></app-status-bar>

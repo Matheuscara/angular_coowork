@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, input } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-nav-bar-return',
@@ -9,11 +9,12 @@ import { Router } from '@angular/router';
   styleUrl: './nav-bar-return.component.scss'
 })
 export class NavBarReturnComponent {
+  share = input.required<boolean>();
   @Input() title: string = "";
 
-  constructor(private router: Router) { }
+  constructor(private location: Location) {}
 
   returnHome() {
-    this.router.navigate(['/home']);
+    this.location.back();
   }
 }

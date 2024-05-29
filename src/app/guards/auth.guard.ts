@@ -26,11 +26,9 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     return this.userService.getTokenVerify().pipe(
       switchMap((res: any) => {
-        // Se a verificação do token for bem-sucedida
         return of(true);
       }),
       catchError(() => {
-        // Se a verificação do token falhar, tenta fazer o refresh
         return this.userService.postRefresh().pipe(
           map((res: any) => {
             if (res && res.token) {

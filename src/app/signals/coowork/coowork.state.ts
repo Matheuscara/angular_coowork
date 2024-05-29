@@ -3,6 +3,7 @@ import { Coowork } from '../../models/coowork';
 import { CooworkMethods } from './coowork.methods';
 import { CooworkSelectors } from './coowork.selectors';
 import { cooworkDetails } from '../../models/coowork-details';
+import { CooworkHooks } from './coowork.hooks';
 
 export interface CooworkState {
   cooworkList: {
@@ -23,7 +24,7 @@ export const initialState: CooworkState = {
       id: 0,
       name: '',
       imageCoowork: '',
-      coffe: false,
+      coffee: false,
       meetingRoom: false,
       safeBox: false,
       dayPrices: [],
@@ -43,7 +44,7 @@ export const initialState: CooworkState = {
         phone_number: 0,
         opening_hours: 0,
         closer_hours: 0,
-        coffe_shop: false,
+        coffee_shop: false,
         safe_box: false,
         meeting_room: false
       },
@@ -57,9 +58,11 @@ export const initialState: CooworkState = {
         state: "",
         country: "",
         number: "",
-        complement: ""
+        complement: "",
+        lat: 0,
+        lon: 0,
       },
-      coffe: false,
+      coffee: false,
       safeBox: false,
       meetingRoom: false
     }
@@ -67,9 +70,8 @@ export const initialState: CooworkState = {
 };
 
 export const CooworkStore = signalStore(
-  { providedIn: 'root' },
   withState(initialState),
   CooworkSelectors(),
   CooworkMethods(),
-  // UserHooks()
+  CooworkHooks()
 );
